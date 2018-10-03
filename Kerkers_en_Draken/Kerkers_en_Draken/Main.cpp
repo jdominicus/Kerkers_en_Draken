@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::cout << "Test" << std::endl;
+	std::cout << "Test 123" << std::endl;
 	std::getchar();
 
 	return 0;
