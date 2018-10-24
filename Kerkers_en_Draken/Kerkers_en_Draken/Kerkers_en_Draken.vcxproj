@@ -125,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="FileReader.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>

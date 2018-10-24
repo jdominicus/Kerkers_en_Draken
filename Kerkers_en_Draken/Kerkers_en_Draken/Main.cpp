@@ -7,7 +7,7 @@
 int main()
 {
 	std::default_random_engine generator;
-	generator.seed(time(0));
+	generator.seed(time(NULL));
 
 	Room* room1 = new Room(generator);
 	Room* room2 = new Room(generator);
