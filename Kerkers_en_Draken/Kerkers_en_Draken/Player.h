@@ -1,17 +1,20 @@
 #pragma once
+
+class Item;
+
 class Player
 {
 	public:
-		Player();
+		Player(char* name);
 		~Player();
 
 	private:
-		char name[15];
-		unsigned int level;
-		unsigned int hitpoints;
-		unsigned int experience;
-		unsigned int attack;
-		unsigned int deffence;
-		char* inventory;
+		const char name[15];
+		int level;
+		int hitpoints;
+		int experience;
+		int attack;
+		int deffence;
+		Item* inventory[];
 };
 
