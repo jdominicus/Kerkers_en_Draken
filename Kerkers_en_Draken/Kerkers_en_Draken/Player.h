@@ -5,11 +5,11 @@ class Item;
 class Player
 {
 	public:
-		Player(char* name);
+		Player();
 		~Player();
 
 	private:
-		const char name[15];
+		char name[15];
 		int level;
 		int hitpoints;
 		int experience;

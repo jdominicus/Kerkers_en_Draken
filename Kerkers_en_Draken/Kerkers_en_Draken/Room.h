@@ -1,12 +1,15 @@
 #pragma once
 
+#include <Random>
+#include <ctime>
+
 class Item;
 class Monster;
 
 class Room
 {
 	public:
-		Room();
+		Room(std::default_random_engine generator);
 		~Room();
 
 	private:
