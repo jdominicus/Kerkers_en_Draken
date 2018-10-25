@@ -9,7 +9,7 @@ class Monster;
 class Room
 {
 	public:
-		Room(std::default_random_engine generator);
+		Room();
 		~Room();
 
 	private:

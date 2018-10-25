@@ -2,8 +2,12 @@
 #include "Item.h"
 #include "Monster.h"
 
-Room::Room(std::default_random_engine generator)
+Room::Room()
 {
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0, INT32_MAX);
+	generator.seed(distribution(generator));
+
 	std::uniform_int_distribution<int> distribution_1(0, 1);
 	clean = distribution_1(generator);
 

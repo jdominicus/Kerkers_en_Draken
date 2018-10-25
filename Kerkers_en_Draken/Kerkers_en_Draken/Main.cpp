@@ -1,4 +1,5 @@
 #include "Room.h"
+#include "FileReader.h"
 
 #include <iostream>
 #include <random>
@@ -6,12 +7,14 @@
 
 int main()
 {
-	std::default_random_engine generator;
-	generator.seed(time(NULL));
+	FileReader* fr = new FileReader();
+	fr->openFile();
 
-	Room* room1 = new Room(generator);
-	Room* room2 = new Room(generator);
-	Room* room3 = new Room(generator);
-	int x = 10;
+	//char ch;
+	//std::fstream fin("C:/Users/remco/Desktop/Remco/School/Minor/CPP1/Eindopdracht/monsters.txt", std::fstream::in);
+	//while (fin >> std::noskipws >> ch) {
+	//	std::cout << ch; // Or whatever
+	//}
 
+	getchar();
 }
