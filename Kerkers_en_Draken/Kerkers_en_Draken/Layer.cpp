@@ -11,13 +11,6 @@ Layer::Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, 
 	for (int i = 0; i < (width * height); i++)
 		rooms[i] = new Room(random, this);
 
-	int startRoom = random->getNumber(0, (width * height - 1));
-	int endRoom = random->getDifferentNumber(0, (width * height - 1), startRoom);
-	rooms[startRoom]->setStartRoom();
-	rooms[endRoom]->setEndRoom();
-	this->startRoom = rooms[startRoom];
-	this->endRoom = rooms[endRoom];
-
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < (width - 1); j++)
@@ -64,9 +57,35 @@ Room* Layer::getStartRoom()
 	return this->startRoom;
 }
 
+void Layer::setStartRoom(int index)
+{
+	if (index >= 0 && index <= (width * height - 1))
+	{
+		rooms[index]->setStartRoom();
+		startRoom = rooms[index];
+	}
+}
+
 Room* Layer::getEndRoom()
 {
 	return this->endRoom;
+}
+
+void Layer::setEndRoom(int index)
+{
+	if (index >= 0 && index <= (width * height - 1))
+	{
+		rooms[index]->setEndRoom();
+		endRoom = rooms[index];
+	}
+}
+
+Room* Layer::getRooms(int index)
+{
+	if (index >= 0 && index <= (width * height - 1))
+		return rooms[index];
+	else
+		return nullptr;
 }
 
 void Layer::print()

@@ -26,7 +26,10 @@ class Layer
 		int getMinLevelMonsters();
 		int getMaxLevelMonsters();
 		Room* getStartRoom();
+		void setStartRoom(int index);
 		Room* getEndRoom();
+		void setEndRoom(int index);
+		Room* getRooms(int index);
 
 		void print();
 };

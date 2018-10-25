@@ -2,6 +2,7 @@
 #include "StringClass.h"
 #include "Room.h"
 #include "Layer.h"
+#include "Dungeon.h"
 
 #define _CRTDBG_MAP_ALLOC  
 #include <stdlib.h>  
@@ -12,12 +13,11 @@ int main()
 {
 	{
 		RandomNumberGenerator* random = new RandomNumberGenerator();
-		Layer* layer = new Layer(5, 5, 1, 2, nullptr, random);
+		Dungeon* dungeon = new Dungeon(10, 5, 10, random);
+		dungeon->print();
 
-		layer->print();
 		getchar();
 		delete random;
-		delete layer;
 	}
 
 	_CrtDumpMemoryLeaks();
