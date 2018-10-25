@@ -6,10 +6,10 @@ class Monster
 		~Monster();
 
 	private:
-		const char name[30];		//naam max 30 karakters
-		const int level;			//1-10 gevaarlijkheid / BAAS voor eindbaas
+		//const char name[30];		//naam max 30 karakters
+		//const int level;			//1-10 gevaarlijkheid / BAAS voor eindbaas
 		int attack;					//percentage voor hitrate
-		const int strengthMin;		//minimum schadepunten
+		//const int strengthMin;		//minimum schadepunten
 		int strengthMax;			//maximum schadepunten
 		int defence;				//percentage voor ontwijken
 		int hp;						//levenspunten

@@ -118,18 +118,24 @@
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="StringClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="StringClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

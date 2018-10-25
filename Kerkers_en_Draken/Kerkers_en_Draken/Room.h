@@ -5,20 +5,45 @@
 
 class Item;
 class Monster;
+class Layer;
+class StringClass;
+class RandomNumberGenerator;
 
 class Room
 {
 	public:
-		Room(std::default_random_engine generator);
+		Room(RandomNumberGenerator* random, Layer* layer);
 		~Room();
 
 	private:
 		bool clean;
-		int layout;
 		int size;
-		char* description;
+		int layout;
+		bool startRoom;
+		bool endRoom;
+		bool visited;
+		char roomType;
 
+		Room* rooms[6]; // North - East - South - West - Up - Down
+		Layer* layer;
 		Item* item;
 		Monster* monster;
+		StringClass* description;
+		RandomNumberGenerator* random;
+
+	public:
+		void setStartRoom();
+		void setEndRoom();
+		void setVisited();
+		bool isVisited();
+		char getRoomType();
+		Room* getRoom(int index);
+		void setRoom(int index, Room* room);
+		void printDescription();
+
+	private:
+		void createDescription();
+		void createItem();
+		void createMonster();
 };
 

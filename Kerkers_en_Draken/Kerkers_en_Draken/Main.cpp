@@ -1,17 +1,24 @@
+#include "RandomNumberGenerator.h"
+#include "StringClass.h"
 #include "Room.h"
+#include "Layer.h"
 
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>
 #include <iostream>
-#include <random>
-#include <ctime>
 
 int main()
 {
-	std::default_random_engine generator;
-	generator.seed(time(NULL));
+	{
+		RandomNumberGenerator* random = new RandomNumberGenerator();
+		Layer* layer = new Layer(5, 5, 1, 2, nullptr, random);
 
-	Room* room1 = new Room(generator);
-	Room* room2 = new Room(generator);
-	Room* room3 = new Room(generator);
-	int x = 10;
+		layer->print();
+		getchar();
+		delete random;
+		delete layer;
+	}
 
+	_CrtDumpMemoryLeaks();
 }
