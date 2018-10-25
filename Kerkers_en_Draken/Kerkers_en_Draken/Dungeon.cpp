@@ -32,13 +32,8 @@ Dungeon::Dungeon(int width, int height, int depth, RandomNumberGenerator* random
 		startRoom->setRoom(4, endRoom);
 	}
 
-	for (int i = 0; i < depth; i++)
-	{
-		for (int j = 0; j < (width * height); j++)
-		{
-			layers[i]->getRooms(j)->setVisited();
-		}
-	}
+	this->startRoom = layers[0]->getStartRoom();
+	this->endRoom = layers[depth - 1]->getEndRoom();
 }
 
 Dungeon::~Dungeon()
@@ -55,6 +50,11 @@ Layer* Dungeon::getLayer(int index)
 		return layers[index];
 	else
 		return nullptr;
+}
+
+Room* Dungeon::getStartRoom()
+{
+	return this->startRoom;
 }
 
 void Dungeon::print()

@@ -63,6 +63,11 @@ char Room::getRoomType()
 	return this->roomType;
 }
 
+StringClass* Room::getDescription()
+{
+	return this->description;
+}
+
 Room* Room::getRoom(int index)
 {
 	if (index >= 0 && index <= 5)
@@ -75,6 +80,22 @@ void Room::setRoom(int index, Room* room)
 {
 	if (index >= 0 && index <= 5)
 		rooms[index] = room;
+}
+
+Item* Room::getItem()
+{
+	return this->item;
+}
+
+Layer* Room::getLayer()
+{
+	return this->layer;
+}
+
+void Room::destroyMonster()
+{
+	if (monster != nullptr)
+		delete monster;
 }
 
 void Room::createDescription()
@@ -106,15 +127,15 @@ void Room::createDescription()
 
 void Room::createItem()
 {
-	if (random->getBool(50))
+	if (random->getBool(80))
 	{
 		switch (random->getNumber(1, 5))
 		{
-			case 1: item = new Item(); break;
-			case 2: item = new Item(); break;
-			case 3: item = new Item(); break;
-			case 4: item = new Item(); break;
-			case 5: item = new Item(); break;
+			case 1: item = new Item("Drankje"); break;
+			case 2: item = new Item("Kompas"); break;
+			case 3: item = new Item("AttackBoost"); break;
+			case 4: item = new Item("StrenghtBoost"); break;
+			case 5: item = new Item("Zwaard"); break;
 		}
 	}
 	else
@@ -144,9 +165,4 @@ void Room::createMonster()
 	{
 		monster = nullptr;
 	}
-}
-
-void Room::printDescription()
-{
-	std::cout << description->getCharArray() << std::endl;
 }

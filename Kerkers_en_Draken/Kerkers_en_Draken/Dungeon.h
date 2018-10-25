@@ -18,10 +18,13 @@ class Dungeon
 
 		Layer** layers;
 		Player* player;
+		Room* startRoom;
+		Room* endRoom;
 		RandomNumberGenerator* random;
 
 	public:
 		Layer* getLayer(int index);
+		Room* getStartRoom();
 		void print();
 };
 

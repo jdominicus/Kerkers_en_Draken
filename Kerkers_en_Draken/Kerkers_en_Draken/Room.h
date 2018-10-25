@@ -37,9 +37,12 @@ class Room
 		void setVisited();
 		bool isVisited();
 		char getRoomType();
+		StringClass* getDescription();
 		Room* getRoom(int index);
 		void setRoom(int index, Room* room);
-		void printDescription();
+		Item* getItem();
+		Layer* getLayer();
+		void destroyMonster();
 
 	private:
 		void createDescription();
