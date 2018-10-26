@@ -1,6 +1,8 @@
 #pragma once
 #include "Monster.h"
 
+#define NR_OFMONSTERS 14
+
 class MonsterFactory
 {
 public:
@@ -8,9 +10,7 @@ public:
 	~MonsterFactory();
 
 private:
-	Monster** optionalMonsters;
-	int nrOfMonsters;
-	void resize();
+	Monster* optionalMonsters[NR_OFMONSTERS];
 
 public:
 	void addMonster(char info[]);

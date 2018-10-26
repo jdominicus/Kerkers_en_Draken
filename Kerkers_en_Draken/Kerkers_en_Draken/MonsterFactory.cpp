@@ -2,9 +2,10 @@
 
 MonsterFactory::MonsterFactory()
 {
-	nrOfMonsters = 0;
-	optionalMonsters = new Monster*[nrOfMonsters];
-	optionalMonsters[0] = nullptr;
+	for (int i = 0; i < NR_OFMONSTERS - 1; i++)
+	{
+		optionalMonsters[i] = nullptr;
+	}
 }
 
 MonsterFactory::~MonsterFactory()
@@ -13,15 +14,16 @@ MonsterFactory::~MonsterFactory()
 
 void MonsterFactory::addMonster(char info[])
 {
-	if (optionalMonsters[nrOfMonsters] != nullptr)
-	{
-		resize();
-	}
-	for (int i = 0; i <= nrOfMonsters; i++)
+	//if (optionalMonsters[nrOfMonsters] != nullptr)
+	//{
+	//	resize();
+	//}
+	for (int i = 0; i <= NR_OFMONSTERS; i++)
 	{
 		if (optionalMonsters[i] == nullptr)
 		{
 			optionalMonsters[i] = createMonster(info);
+			return;
 		}
 	}
 	
@@ -160,18 +162,4 @@ Monster* MonsterFactory::createMonster(char info[])
 	Monster* monster = new Monster(name, level, attack, nrOfAttacks,
 										strengthMin, strengthMax, defence, hp);
 	return monster;
-}
-
-void MonsterFactory::resize()
-{
-	Monster** temp = new Monster*[nrOfMonsters + 1];
-	for (int i = 0; i < nrOfMonsters; i++)
-	{
-		temp[i] = optionalMonsters[i];
-	}
-
-	nrOfMonsters++;
-	optionalMonsters = temp;
-	optionalMonsters[nrOfMonsters] = nullptr;
-	delete[] temp;
 }
