@@ -3,12 +3,11 @@
 class Layer;
 class Room;
 class Player;
-class RandomNumberGenerator;
 
 class Dungeon
 {
 	public:
-		Dungeon(int width, int height, int depth, RandomNumberGenerator* random);
+		Dungeon(int width, int height, int depth);
 		~Dungeon();
 
 	private:
@@ -17,14 +16,13 @@ class Dungeon
 		int depth;
 
 		Layer** layers;
-		Player* player;
 		Room* startRoom;
 		Room* endRoom;
-		RandomNumberGenerator* random;
 
 	public:
 		Layer* getLayer(int index);
 		Room* getStartRoom();
+		Room* getEndRoom();
 		void print();
 };
 

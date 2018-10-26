@@ -2,12 +2,11 @@
 
 class Room;
 class Dungeon;
-class RandomNumberGenerator;
 
 class Layer
 {
 	public:
-		Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon* , RandomNumberGenerator* random);
+		Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon& dungeon);
 		~Layer();
 	
 	private:
@@ -20,7 +19,6 @@ class Layer
 		Room* startRoom;
 		Room* endRoom;
 		Dungeon* dungeon;
-		RandomNumberGenerator* random;
 
 	public:
 		int getMinLevelMonsters();

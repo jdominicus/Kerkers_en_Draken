@@ -13,23 +13,23 @@
 int main()
 {
 	{
-		RandomNumberGenerator* random = new RandomNumberGenerator();
-		Dungeon* dungeon = new Dungeon(5, 3, 3, random);
-		Player* player = new Player("Jordy", 1, 10, 0, 1, 1, dungeon);
+		Dungeon* dungeon = new Dungeon(5, 3, 3);
+		Player* player = new Player("Jordy", 1, 10, 0, 1, 1, *dungeon);
 
-		while (true)
+		int input = 0;
+		while (input < 9)
 		{
 			player->getLayer()->print();
-			player->displayCurrentRoom();
-			int option;
-			std::cin >> option;
-			player->move(option);
+			std::cin >> input;
+			player->move(input);
+			player->pickUpItem();
+			player->displayInventory();
 		}
 
-		getchar();
-		delete random;
 		delete dungeon;
 		delete player;
+
+		RandomNumberGenerator::removeRandom();
 	}
 
 	_CrtDumpMemoryLeaks();

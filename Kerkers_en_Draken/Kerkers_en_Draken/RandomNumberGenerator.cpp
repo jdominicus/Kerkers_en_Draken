@@ -1,5 +1,7 @@
 #include "RandomNumberGenerator.h"
 
+RandomNumberGenerator* RandomNumberGenerator::random = nullptr;
+
 RandomNumberGenerator::RandomNumberGenerator()
 {
 	generator.seed(time(NULL));
@@ -7,6 +9,20 @@ RandomNumberGenerator::RandomNumberGenerator()
 
 RandomNumberGenerator::~RandomNumberGenerator()
 {
+}
+
+RandomNumberGenerator* RandomNumberGenerator::getRandom()
+{
+	if (random == nullptr)
+		random = new RandomNumberGenerator();
+
+	return random;
+}
+
+void RandomNumberGenerator::removeRandom()
+{
+	if (random != nullptr)
+		delete random;
 }
 
 int RandomNumberGenerator::getNumber(int min, int max)

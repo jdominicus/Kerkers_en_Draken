@@ -5,11 +5,13 @@
 
 #include <iostream>
 
-Dungeon::Dungeon(int width, int height, int depth, RandomNumberGenerator* random) : width{ width }, height{ height }, depth{ depth }, random{ random }
+Dungeon::Dungeon(int width, int height, int depth) : width{ width }, height{ height }, depth{ depth }
 {
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+
 	layers = new Layer*[depth];
 	for (int i = 0; i < depth; i++)
-		layers[i] = new Layer(width, height, i, i, this, random);
+		layers[i] = new Layer(width, height, i, i, *this);
 
 	int indexStartRoom = random->getNumber(0, (width * height - 1));
 	int indexEndRoom = random->getDifferentNumber(0, (width * height - 1), indexStartRoom);
@@ -55,6 +57,11 @@ Layer* Dungeon::getLayer(int index)
 Room* Dungeon::getStartRoom()
 {
 	return this->startRoom;
+}
+
+Room* Dungeon::getEndRoom()
+{
+	return this->endRoom;
 }
 
 void Dungeon::print()

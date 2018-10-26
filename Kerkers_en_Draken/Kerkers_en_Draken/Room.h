@@ -7,12 +7,11 @@ class Item;
 class Monster;
 class Layer;
 class StringClass;
-class RandomNumberGenerator;
 
 class Room
 {
 	public:
-		Room(RandomNumberGenerator* random, Layer* layer);
+		Room(Layer& layer);
 		~Room();
 
 	private:
@@ -29,7 +28,6 @@ class Room
 		Item* item;
 		Monster* monster;
 		StringClass* description;
-		RandomNumberGenerator* random;
 
 	public:
 		void setStartRoom();
@@ -41,6 +39,7 @@ class Room
 		Room* getRoom(int index);
 		void setRoom(int index, Room* room);
 		Item* getItem();
+		void removeItem();
 		Layer* getLayer();
 		void destroyMonster();
 

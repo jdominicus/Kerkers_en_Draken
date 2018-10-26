@@ -1,46 +1,41 @@
 #include "Item.h"
+#include "Player.h"
 #include "StringClass.h"
 
-Item::Item() : Item("Error")
-{
-}
+#include <iostream>
 
-Item::Item(const char* name) : name{ new StringClass(name) }
+Item::Item(int id, const char* name) : id{ id }, name{ new StringClass(name) }
 {
 }
 
 Item::~Item()
 {
+	delete name;
 }
 
-Item::Item(const Item& other)
+void Item::use(Player& player)
 {
-	this->name = new StringClass(other.name->getCharArray());
+	switch (this->id) 
+	{
+		case 0: player.changeStats(10, 0, 0); 
+				std::cout << "You drink the potion... It heals 10 hitpoints!";
+				break;
+		case 1: player.changeStats(5, 0, 0); 
+				std::cout << "You drink the potion... It heals 5 hitpoints!";
+				break;
+		case 2: player.changeStats(0, 5, 0); 
+				std::cout << "You equip the sword and it increases your attack by 5!";
+				break;
+		case 3: player.changeStats(0, 10, 0); 
+				std::cout << "You equip the amulet and it increases your attack by 10!";
+				break;
+		case 4: player.changeStats(0, 0, 10); 
+				std::cout << "You equip the shield and it increases your defence by 10!";
+				break;
+	}
 }
 
-Item::Item(Item&& other)
+const char* Item::getName()
 {
-	this->name = other.name;
-	other.name = nullptr;
-}
-
-Item& Item::operator=(Item& other)
-{
-	if (name != nullptr)
-		delete name;
-
-	this->name = new StringClass(other.name->getCharArray());
-
-	return *this;
-}
-
-Item& Item::operator=(Item&& other)
-{
-	if (name != nullptr)
-		delete name;
-
-	this->name = other.name;
-	other.name = nullptr;
-
-	return *this;
+	return this->name->getCharArray();
 }

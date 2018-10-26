@@ -4,12 +4,15 @@
 
 #include <iostream>
 
-Layer::Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon* dungeon, RandomNumberGenerator* random) 
-	: width{ width }, height{ height }, minLevelMonsters{ minLevelMonsters }, maxLevelMonsters{ maxLevelMonsters }, dungeon{ dungeon }, random{ random }
+Layer::Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon& dungeon) 
+	: width{ width }, height{ height }, minLevelMonsters{ minLevelMonsters }, maxLevelMonsters{ maxLevelMonsters }, dungeon{ &dungeon }, 
+	startRoom{ nullptr }, endRoom{ nullptr }
 {
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+
 	rooms = new Room*[width * height];
 	for (int i = 0; i < (width * height); i++)
-		rooms[i] = new Room(random, this);
+		rooms[i] = new Room(*this);
 
 	for (int i = 0; i < height; i++)
 	{
@@ -82,10 +85,7 @@ void Layer::setEndRoom(int index)
 
 Room* Layer::getRooms(int index)
 {
-	if (index >= 0 && index <= (width * height - 1))
-		return rooms[index];
-	else
-		return nullptr;
+	return (index >= 0 && index <= (width * height - 1) ? rooms[index] : nullptr);
 }
 
 void Layer::print()

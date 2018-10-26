@@ -1,19 +1,20 @@
 #pragma once
 
+class Player;
 class StringClass;
 
 class Item
 {
 	public:
-		Item();
-		Item(const char* name);
+		Item(int id, const char* name);
 		~Item();
-		Item(const Item& other);
-		Item(Item&& other);
-		Item& operator=(Item& other);
-		Item& operator=(Item&& other);
 
 	private:
+		int id;
 		StringClass* name;
+
+	public:
+		void use(Player& player);
+		const char* getName();
 };
 

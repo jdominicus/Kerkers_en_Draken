@@ -7,9 +7,10 @@
 
 #include <iostream>
 
-Room::Room(RandomNumberGenerator* random, Layer* layer) 
-	: layer{ layer }, startRoom{ false }, endRoom{ false }, visited{ false }, roomType{ '.' }, description{ nullptr }, rooms{}, random{ random }
+Room::Room(Layer& layer) 
+	: layer{ &layer }, startRoom{ false }, endRoom{ false }, visited{ false }, roomType{ '.' }
 {
+	RandomNumberGenerator*  random = RandomNumberGenerator::getRandom();
 	clean = random->getNumber(0, 1);
 	size = random->getNumber(1, 3);
 	layout = random->getNumber(1, 3);
@@ -87,6 +88,11 @@ Item* Room::getItem()
 	return this->item;
 }
 
+void Room::removeItem()
+{
+	this->item = nullptr;
+}
+
 Layer* Room::getLayer()
 {
 	return this->layer;
@@ -127,25 +133,27 @@ void Room::createDescription()
 
 void Room::createItem()
 {
-	if (random->getBool(80))
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+
+	if (random->getBool(50))
 	{
 		switch (random->getNumber(1, 5))
 		{
-			case 1: item = new Item("Drankje"); break;
-			case 2: item = new Item("Kompas"); break;
-			case 3: item = new Item("AttackBoost"); break;
-			case 4: item = new Item("StrenghtBoost"); break;
-			case 5: item = new Item("Zwaard"); break;
+			case 1: item = new Item(0, "HP Potion (10)"); break;
+			case 2: item = new Item(1, "HP Potion (5)"); break;
+			case 3: item = new Item(2, "Sword"); break;
+			case 4: item = new Item(3, "Amulet"); break;			
+			case 5: item = new Item(4, "Shield"); break;
 		}
 	}
 	else
-	{
 		item = nullptr;
-	}
 }
 
 void Room::createMonster()
 {
+	RandomNumberGenerator*  random = RandomNumberGenerator::getRandom();
+
 	if (random->getBool(50))
 	{
 		switch (random->getNumber(0, 5))

@@ -10,7 +10,7 @@ class RandomNumberGenerator;
 class Player
 {
 	public:
-		Player(const char* name, int level, int hitpoints, int experience, int attack, int deffence, Dungeon* dungeon);
+		Player(const char* name, int level, int hitpoints, int experience, int attack, int defence, Dungeon& dungeon);
 		~Player();
 
 	private:
@@ -18,7 +18,7 @@ class Player
 		int hitpoints;
 		int experience;
 		int attack;
-		int deffence;
+		int defence;
 
 		StringClass* name;
 		Room* currentRoom;
@@ -29,7 +29,14 @@ class Player
 	public:
 		Layer* getLayer();
 		void pickUpItem();
+		void useItem(int index);
 		void move(int direction);
+
+		void addExperience(int experience);
+		void changeStats(int hitpoints, int attack, int defence);
+
+		void displayStats();
+		void displayInventory();
 		void displayCurrentRoom();
 		void displayCurrentLayer();
 };
