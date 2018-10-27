@@ -4,6 +4,7 @@ class StringClass
 	public:
 		StringClass(const char* string);
 		~StringClass();
+		StringClass(const StringClass& other);
 
 	private:
 		const char* charArray;

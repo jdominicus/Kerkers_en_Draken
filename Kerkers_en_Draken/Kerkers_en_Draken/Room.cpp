@@ -8,16 +8,15 @@
 #include <iostream>
 
 Room::Room(Layer& layer) 
-	: layer{ &layer }, startRoom{ false }, endRoom{ false }, visited{ false }, roomType{ '.' }
+	: layer{ &layer }, startRoom{ false }, endRoom{ false }, visited{ false }, roomType{ '.' }, monster{ nullptr }
 {
-	RandomNumberGenerator*  random = RandomNumberGenerator::getRandom();
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
 	clean = random->getNumber(0, 1);
 	size = random->getNumber(1, 3);
 	layout = random->getNumber(1, 3);
 	
 	createDescription();
 	createItem();
-	createMonster();
 }
 
 Room::~Room()
@@ -93,15 +92,20 @@ void Room::removeItem()
 	this->item = nullptr;
 }
 
-Layer* Room::getLayer()
+Monster* Room::getMonster() 
 {
-	return this->layer;
+	return this->monster;
 }
 
 void Room::destroyMonster()
 {
 	if (monster != nullptr)
 		delete monster;
+}
+
+Layer* Room::getLayer()
+{
+	return this->layer;
 }
 
 void Room::createDescription()
@@ -148,29 +152,4 @@ void Room::createItem()
 	}
 	else
 		item = nullptr;
-}
-
-void Room::createMonster()
-{
-	RandomNumberGenerator*  random = RandomNumberGenerator::getRandom();
-
-	if (random->getBool(50))
-	{
-		switch (random->getNumber(0, 5))
-		{
-			case 1:	break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
-			case 5: break;
-			case 6: break;
-			case 7: break;
-			case 8: break;
-			case 9: break;
-		}
-	}
-	else
-	{
-		monster = nullptr;
-	}
 }

@@ -40,12 +40,12 @@ class Room
 		void setRoom(int index, Room* room);
 		Item* getItem();
 		void removeItem();
-		Layer* getLayer();
+		Monster* getMonster();
 		void destroyMonster();
+		Layer* getLayer();
 
 	private:
 		void createDescription();
 		void createItem();
-		void createMonster();
 };
 

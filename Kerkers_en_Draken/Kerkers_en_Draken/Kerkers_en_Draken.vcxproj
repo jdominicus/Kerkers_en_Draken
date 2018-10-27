@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="FileReader.cpp" />
@@ -125,8 +126,10 @@
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="StringClass.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Item.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="StringClass.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

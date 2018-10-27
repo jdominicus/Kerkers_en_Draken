@@ -14,6 +14,13 @@ StringClass::~StringClass()
 	delete[] charArray;
 }
 
+StringClass::StringClass(const StringClass& other)
+{	
+	char* newString = new char[strlen(other.charArray) + 1];
+	strcpy_s(newString, strlen(other.charArray) + 1, other.charArray);
+	this->charArray = newString;
+}
+
 const char* StringClass::getCharArray()
 {
 	return this->charArray;
