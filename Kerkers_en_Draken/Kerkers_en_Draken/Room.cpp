@@ -108,6 +108,41 @@ Layer* Room::getLayer()
 	return this->layer;
 }
 
+void Room::print()
+{
+	std::cout << description->getCharArray() << std::endl;
+	std::cout << "Item: ";
+
+	if (item != nullptr)
+		std::cout << item->getName() << std::endl;
+	else
+		std::cout << "-" << std::endl;
+
+	std::cout << "Monster: ";
+
+	if (monster != nullptr)
+		std::cout << "Ja" << std::endl;
+	else
+		std::cout << "-" << std::endl;
+
+	std::cout << "Exits: ";
+	
+	if (rooms[0] != nullptr)
+		std::cout << "North ";
+	if (rooms[1] != nullptr)
+		std::cout << "East ";
+	if (rooms[2] != nullptr)
+		std::cout << "South ";
+	if (rooms[3] != nullptr)
+		std::cout << "West ";
+	if (rooms[4] != nullptr)
+		std::cout << "Up ";
+	if (rooms[5] != nullptr)
+		std::cout << "Down ";
+
+	std::cout << std::endl << std::endl;
+}
+
 void Room::createDescription()
 {
 	description = new StringClass("Het is een ");

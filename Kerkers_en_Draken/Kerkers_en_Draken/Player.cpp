@@ -30,6 +30,11 @@ Player::~Player()
 	delete name;
 }
 
+Room* Player::getCurrentRoom()
+{
+	return this->currentRoom;
+}
+
 Layer* Player::getLayer()
 {
 	return this->currentLayer;
@@ -44,32 +49,53 @@ void Player::pickUpItem()
 			{
 				inventory[i] = currentRoom->getItem();
 				currentRoom->removeItem();
+				std::cout << "You pick up the " << inventory[i]->getName() << "!" << std::endl << std::endl;
 				return;
 			}
 
-		std::cout << "Your inventory is full!" << std::endl;
-		std::cout << std::endl;
+		std::cout << "Your inventory is full!" << std::endl << std::endl;
 	}
+	else
+		std::cout << "There is no item in this room!" << std::endl << std::endl;
 }
 
-void Player::useItem(int index)
+void Player::useItem()
 {
-	if (index >= 0 && index <= 4 && inventory[index] != nullptr)
+	bool hasItem = false;
+	for (int i = 0; i < 5; i++)
 	{
-		inventory[index]->use(*this);
-		delete inventory[index];
+		if (inventory[i] != nullptr)
+			hasItem = true;
 	}
-}
 
-void Player::move(int direction)
-{
-	if (currentRoom->getRoom(direction) != nullptr)
+	if (!hasItem)
 	{
-		currentRoom->destroyMonster();
-		currentRoom = currentRoom->getRoom(direction);
-		currentRoom->setVisited();
-		currentLayer = currentRoom->getLayer();
+		std::cout << "You don't have any items in your inventory!" << std::endl << std::endl;
+		return;
 	}
+
+	std::cout << "Choose a item:" << std::endl;
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (inventory[i] != nullptr)
+			std::cout << "-" << i + 1 << ": " << inventory[i]->getName() << std::endl;
+		else
+			std::cout << "-" << i + 1 << ": Empty" << std::endl;
+	}
+
+	int item = getInputInt("Item: ", 1, 5);
+	while (inventory[item - 1] == nullptr)
+	{
+		std::cout << "You can't use this item!" << std::endl;
+		item = getInputInt("Item: ", 1, 5);
+	}
+
+	std::cout << std::endl;
+	inventory[item - 1]->use(*this);
+	delete inventory[item - 1];
+	inventory[item - 1] = nullptr;
+	std::cout << std::endl;
 }
 
 void Player::rest()
@@ -98,7 +124,26 @@ void Player::fight()
 
 void Player::run()
 {
+	std::cout << "Choose a direction:" << std::endl;
+	std::cout << "-1: North" << std::endl;
+	std::cout << "-2: East" << std::endl;
+	std::cout << "-3: South" << std::endl;
+	std::cout << "-4: West" << std::endl;
+	std::cout << "-5: Staircase up" << std::endl;
+	std::cout << "-6: Staircase down" << std::endl;
 
+	int direction = getInputInt("Direction: ", 1, 6) - 1;
+	while (currentRoom->getRoom(direction) == nullptr)
+	{
+		std::cout << "You can't go in this direction!" << std::endl;
+		direction = getInputInt("Direction: ", 1, 6) - 1;
+	}
+		
+	currentRoom->destroyMonster();
+	currentRoom = currentRoom->getRoom(direction);
+	currentRoom->setVisited();
+	currentLayer = currentRoom->getLayer();
+	std::cout << std::endl;
 }
 
 void Player::addExperience(int experience)
@@ -139,20 +184,12 @@ void Player::displayInventory()
 
 	for (int i = 0; i < 5; i++)
 	{
-		std::cout << "- " << i << ": ";
-
 		if (inventory[i] != nullptr)
-			std::cout << inventory[i]->getName() << std::endl;
+			std::cout << "- " << i << ": " << inventory[i]->getName() << std::endl;
 		else
-			std::cout << "Empty" << std::endl;
+			std::cout << "- " << i << ": Empty" << std::endl;
 	}
 
-	std::cout << std::endl;
-}
-
-void Player::displayCurrentRoom()
-{
-	std::cout << currentRoom->getDescription()->getCharArray() << std::endl;
 	std::cout << std::endl;
 }
 

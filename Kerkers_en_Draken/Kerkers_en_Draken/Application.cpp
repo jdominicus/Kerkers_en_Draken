@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Dungeon.h"
+#include "Room.h"
 #include "Player.h"
 #include "StringClass.h"
 #include "RandomNumberGenerator.h"
@@ -27,6 +28,7 @@ void Application::start()
 	{
 		displayOptions();
 		int input = handleUserInput();
+		std::cout << std::endl;
 		handleOptions(input);
 	}
 }
@@ -45,16 +47,12 @@ void Application::createNewDungeon()
 
 void Application::createNewPlayer()
 {
-	if (dungeon != nullptr)
-	{
-		if (player != nullptr)
-			delete player;
+	if (player != nullptr)
+		delete player;
 
-		StringClass name(getInputString("Enter your name: ", 1, 15));
-		player = new Player(name.getCharArray(), *dungeon);
-	}
-	else
-		std::cout << "You don't have a dungeon for a new player yet!" << std::endl << std::endl;
+	StringClass name(getInputString("Enter your name: ", 1, 15));
+	player = new Player(name.getCharArray(), *dungeon);
+	std::cout << std::endl;
 }
 
 void Application::createCustomPlayer()
@@ -70,9 +68,10 @@ void Application::displayOptions()
 			std::cout << "Choose one of the following options:" << std::endl;
 			std::cout << "- 1: Create dungeon (new player)" << std::endl;
 			std::cout << "- 2: Create dungeon (load player)" << std::endl;
-			std::cout << "- 3: Quit" << std::endl << std::endl;
+			std::cout << "- 3: Quit" << std::endl;
 			break;
 		case 1:
+			player->getCurrentRoom()->print();
 			std::cout << "Choose one of the following options:" << std::endl;
 			std::cout << "- 1: Fight" << std::endl;
 			std::cout << "- 2: Run" << std::endl;
@@ -81,13 +80,13 @@ void Application::displayOptions()
 			std::cout << "- 5: Show inventory" << std::endl;
 			std::cout << "- 6: Show map" << std::endl;
 			std::cout << "- 7: Show stats" << std::endl;
-			std::cout << "- 8: Quit" << std::endl << std::endl;
+			std::cout << "- 8: Quit" << std::endl;
 			break;
 		case 2:
 			std::cout << "Choose one of the following options:" << std::endl;
 			std::cout << "- 1: Attack" << std::endl;
 			std::cout << "- 2: Run" << std::endl;
-			std::cout << "- 3: Use item" << std::endl << std::endl;
+			std::cout << "- 3: Use item" << std::endl;
 			break;
 	}
 }

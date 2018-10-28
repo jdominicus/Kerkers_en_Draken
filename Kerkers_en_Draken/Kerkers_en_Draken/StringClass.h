@@ -13,6 +13,7 @@ class StringClass
 		const char* getCharArray();
 		int getLength();
 		void append(const char* string);
+		void empty();
 		void print();
 };
 

@@ -37,14 +37,15 @@ StringClass UserInterface::getInputString(const char* message, int min, int max)
 	while (true)
 	{
 		char* inputChar = new char[max + 1];
-		std::cin.get(inputChar, max, '\n');
 		inputChar[max] = '\0';
+		std::cin.get(inputChar, max, '\n');
+		
 		input.append(inputChar);
 		delete[] inputChar;
 
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+		
 		if (input.getLength() >= min && input.getLength() <= max)
 			return input;
 		else

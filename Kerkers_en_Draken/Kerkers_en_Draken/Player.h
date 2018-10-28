@@ -31,10 +31,10 @@ class Player : public UserInterface
 		Item* inventory[5];
 
 	public:
+		Room* getCurrentRoom();
 		Layer* getLayer();
 		void pickUpItem();
-		void useItem(int index);
-		void move(int direction);
+		void useItem();
 		void rest();
 		void fight();
 		void run();
@@ -44,7 +44,6 @@ class Player : public UserInterface
 
 		void displayStats();
 		void displayInventory();
-		void displayCurrentRoom();
 		void displayCurrentLayer();
 };
 

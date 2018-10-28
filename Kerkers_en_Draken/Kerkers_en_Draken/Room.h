@@ -43,6 +43,7 @@ class Room
 		Monster* getMonster();
 		void destroyMonster();
 		Layer* getLayer();
+		void print();
 
 	private:
 		void createDescription();

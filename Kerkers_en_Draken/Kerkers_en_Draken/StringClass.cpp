@@ -41,6 +41,14 @@ void StringClass::append(const char* string)
 	charArray = newString;
 }
 
+void StringClass::empty()
+{
+	delete[] charArray;
+	char* newString = new char[1];
+	newString[0] = '\0';
+	charArray = newString;
+}
+
 void StringClass::print()
 {
 	std::cout << charArray;
