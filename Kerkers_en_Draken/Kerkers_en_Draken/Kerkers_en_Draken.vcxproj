@@ -133,6 +133,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\Desktop\Remco\School\Minor\CPP1\Eindopdracht\monsters.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

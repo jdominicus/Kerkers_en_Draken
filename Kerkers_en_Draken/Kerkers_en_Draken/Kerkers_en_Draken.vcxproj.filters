@@ -63,4 +63,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\Desktop\Remco\School\Minor\CPP1\Eindopdracht\monsters.txt" />
+  </ItemGroup>
 </Project>

@@ -15,8 +15,8 @@ void FileReader::openFile()
 {
 	file.exceptions(std::ifstream::badbit); // No need to check failbit
 	try {
-		file.open("C:/Users/remco/Desktop/Remco/School/Minor/CPP1/Eindopdracht/monsters.txt");
-		char c;
+		//file.open("C:/Users/remco/Desktop/Remco/School/Minor/CPP1/Eindopdracht/monsters.txt");
+		file.open("monsters.txt");
 		while (!file.eof())
 		{
 			readLine();
