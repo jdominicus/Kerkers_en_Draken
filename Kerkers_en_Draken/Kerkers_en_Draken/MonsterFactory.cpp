@@ -4,9 +4,16 @@ MonsterFactory* MonsterFactory::mF = nullptr;
 
 MonsterFactory::MonsterFactory()
 {
-	nrOfMonsters = 0;
-	optionalMonsters = new Monster*[nrOfMonsters];
-	optionalMonsters[0] = nullptr;
+	FileHandler* fh = new FileHandler();
+	fh->openMonsterFile();
+
+	for (int i = 0; i < NR_OFMONSTERS; i++)
+	{
+		optionalMonsters[i] = createMonster(fh->readInfo());
+	}
+
+
+	fh->closeFile();
 }
 
 MonsterFactory::~MonsterFactory()
@@ -172,5 +179,32 @@ Monster* MonsterFactory::getBoss() const
 	else
 	{
 		return optionalMonsters[13];
+	}
+}
+
+Monster* MonsterFactory::getMonster(int layer) const
+{
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+	int nr = 0;
+	int startPos = 0;
+	for (int i = 0; i < NR_OFMONSTERS; i++)
+	{
+		if (optionalMonsters[i]->getLevel() == layer)
+		{
+			if (startPos == 0)
+			{
+				startPos = i;
+			}
+			nr++;
+		}
+	}
+
+	if (random->getBool(50 + layer * 5))
+	{
+		return optionalMonsters[startPos + random->getNumber(0, nr)];
+	}
+	else
+	{
+		return nullptr;
 	}
 }

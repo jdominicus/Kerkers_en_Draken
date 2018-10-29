@@ -7,14 +7,13 @@ class Dungeon;
 class Layer
 {
 	public:
-		Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon& dungeon);
+		Layer(int width, int height, Dungeon& dungeon, int layerLevel);
 		~Layer();
 	
 	private:
 		const int width;
 		const int height;
-		const int minLevelMonsters;
-		const int maxLevelMonsters;
+		const int layerLevel;
 
 		Room** rooms;
 		Room* startRoom;
@@ -22,8 +21,7 @@ class Layer
 		Dungeon* const dungeon;
 
 	public:
-		int getMinLevelMonsters() const;
-		int getMaxLevelMonsters() const;
+		int getLayerLevel() const;
 		Room* getStartRoom() const;
 		void setStartRoom(int index);
 		Room* getEndRoom() const;

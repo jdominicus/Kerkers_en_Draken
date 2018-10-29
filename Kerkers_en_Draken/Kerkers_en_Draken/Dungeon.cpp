@@ -14,7 +14,7 @@ Dungeon::Dungeon(int width, int height, int depth) : width{ width }, height{ hei
 	{
 		try
 		{
-			layers[i] = new Layer(width, height, i, i, *this);
+			layers[i] = new Layer(width, height, *this, i+1);
 			if (layers[i] == nullptr)
 				throw 0;
 		}

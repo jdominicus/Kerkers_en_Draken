@@ -17,7 +17,6 @@ Room::Room(Layer& layer)
 	size = random->getNumber(1, 3);
 	layout = random->getNumber(1, 3);
 	
-	//setMonster();
 	createDescription();
 	createItem();
 }
@@ -100,13 +99,12 @@ void Room::setMonster()
 	MonsterFactory* mF = MonsterFactory::getMF();
 	if (endRoom && this == this->getLayer()->getDungeonEndRoom())
 	{
-		mF->getBoss();
+		monster = mF->getBoss();
 	}
-	//end room laatste layer?
-	//	kies een boss
-	//anders
-	//	random->bool
-	//		kijk tussen lijst, op layer een monster kopiëren
+	else
+	{
+		monster = mF->getMonster(getLayer()->getLayerLevel());
+	}
 }
 
 Monster* Room::getMonster() const
