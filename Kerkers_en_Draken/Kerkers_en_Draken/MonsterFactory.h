@@ -1,5 +1,6 @@
 #pragma once
 #include "Monster.h"
+#include "FileHandler.h"
 
 #define NR_OFMONSTERS 14
 

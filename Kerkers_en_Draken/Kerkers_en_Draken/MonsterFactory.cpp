@@ -1,11 +1,19 @@
 #include "MonsterFactory.h"
 
+class FileHandler;
+
 MonsterFactory::MonsterFactory()
 {
+	FileHandler* fh = new FileHandler();
+	fh->openMonsterFile();
+
 	for (int i = 0; i < NR_OFMONSTERS; i++)
 	{
-		optionalMonsters[i] = nullptr;
+		optionalMonsters[i] = createMonster(fh->readInfo());
 	}
+
+
+	fh->closeFile();
 }
 
 MonsterFactory::~MonsterFactory()

@@ -117,7 +117,7 @@
   <ItemGroup>
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterFactory.cpp" />
@@ -126,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dungeon.h" />
-    <ClInclude Include="FileReader.h" />
+    <ClInclude Include="FileHandler.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterFactory.h" />

@@ -1,5 +1,5 @@
 #include "Room.h"
-#include "FileReader.h"
+#include "MonsterFactory.h"
 
 #include <iostream>
 #include <random>
@@ -7,8 +7,7 @@
 
 int main()
 {
-	FileReader* fr = new FileReader();
-	fr->openFile();
+	MonsterFactory* mf = new MonsterFactory();
 
 	//char ch;
 	//std::fstream fin("C:/Users/remco/Desktop/Remco/School/Minor/CPP1/Eindopdracht/monsters.txt", std::fstream::in);

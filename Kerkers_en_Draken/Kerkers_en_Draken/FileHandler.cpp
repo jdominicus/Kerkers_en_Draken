@@ -1,39 +1,34 @@
-#include "FileReader.h"
+#include "FileHandler.h"
 
-#define lineLength 100
-
-FileReader::FileReader()
+FileHandler::FileHandler()
 {
-	mf = new MonsterFactory();
+	//mf = new MonsterFactory();
 }
 
-FileReader::~FileReader()
+FileHandler::~FileHandler()
 {
 }
 
-void FileReader::openFile()
+void FileHandler::openMonsterFile()
 {
 	file.exceptions(std::ifstream::badbit); // No need to check failbit
 	try {
-		//file.open("C:/Users/remco/Desktop/Remco/School/Minor/CPP1/Eindopdracht/monsters.txt");
 		file.open("monsters.txt");
-		while (!file.eof())
-		{
-			readLine();
-		}
 	}
 	catch (const std::ifstream::failure& e) {
 		std::cout << "Exception opening/reading file";
 	}
+}
 
+void FileHandler::closeFile()
+{
 	file.close();
 }
 
-void FileReader::readLine()
+char* FileHandler::readInfo()
 {
-	char info[lineLength];
 	char ch = file.get();
-	if (!file.eof())
+	while (!file.eof())
 	{
 		if (ch == '[')
 		{
@@ -48,8 +43,10 @@ void FileReader::readLine()
 			}
 			info[i] = ch;
 			std::cout << std::endl;
-			mf->addMonster(info);
+			return info;
 		}
 		ch = file.get();
 	}
+
+	return info;
 }
