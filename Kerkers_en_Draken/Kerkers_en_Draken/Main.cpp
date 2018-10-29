@@ -9,18 +9,8 @@
 int main()
 {
 	{
-		try
-		{
-			Application application;
-			application.start();
-		}
-		catch (int error)
-		{
-			switch (error)
-			{
-				case 0: std::cout << "Bad allocation error!" << std::endl;
-			}
-		}
+		Application application;
+		application.start();
 	}
 
 	_CrtDumpMemoryLeaks();

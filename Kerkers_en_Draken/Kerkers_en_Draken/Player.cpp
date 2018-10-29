@@ -23,7 +23,7 @@ Player::Player(const char* name, int level, int experience, int hitpoints, int m
 
 Player::~Player()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < INV_SPACE; i++)
 		if (inventory[i] != nullptr)
 			delete inventory[i];
 
@@ -42,12 +42,9 @@ Layer* Player::getLayer() const
 
 void Player::pickUpItem()
 {
-	Room* hoi = nullptr;
-	hoi->destroyMonster();
-
 	if (currentRoom != nullptr && currentRoom->getItem() != nullptr)
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < INV_SPACE; i++)
 			if (inventory[i] == nullptr)
 			{
 				inventory[i] = currentRoom->getItem();
@@ -65,7 +62,7 @@ void Player::pickUpItem()
 void Player::useItem()
 {
 	bool hasItem = false;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < INV_SPACE; i++)
 		if (inventory[i] != nullptr)
 			hasItem = true;
 
@@ -77,7 +74,7 @@ void Player::useItem()
 
 	std::cout << "Choose a item:" << std::endl;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < INV_SPACE; i++)
 	{
 		if (inventory[i] != nullptr)
 			std::cout << "-" << i + 1 << ": " << inventory[i]->getName() << std::endl;
@@ -126,12 +123,12 @@ void Player::fight()
 void Player::run()
 {
 	std::cout << "Choose a direction:" << std::endl;
-	std::cout << "-1: North" << std::endl;
-	std::cout << "-2: East" << std::endl;
-	std::cout << "-3: South" << std::endl;
-	std::cout << "-4: West" << std::endl;
-	std::cout << "-5: Staircase up" << std::endl;
-	std::cout << "-6: Staircase down" << std::endl;
+	std::cout << "- 1: North" << std::endl;
+	std::cout << "- 2: East" << std::endl;
+	std::cout << "- 3: South" << std::endl;
+	std::cout << "- 4: West" << std::endl;
+	std::cout << "- 5: Staircase up" << std::endl;
+	std::cout << "- 6: Staircase down" << std::endl;
 
 	int direction = getInputInt("Direction: ", 1, 6) - 1;
 	while (currentRoom->getRoom(direction) == nullptr)
@@ -183,7 +180,7 @@ void Player::displayInventory() const
 {
 	std::cout << "Inventory:" << std::endl;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < INV_SPACE; i++)
 	{
 		if (inventory[i] != nullptr)
 			std::cout << "- " << i << ": " << inventory[i]->getName() << std::endl;

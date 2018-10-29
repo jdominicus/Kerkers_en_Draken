@@ -56,11 +56,34 @@ void Application::createNewDungeon()
 
 void Application::createNewPlayer()
 {
+	this->gameState = 1;
 	if (player != nullptr)
 		delete player;
 
 	StringClass name(getInputString("Enter your name: ", 1, 15));
-	player = new Player(name.getCharArray(), *dungeon);
+	
+	try
+	{
+		if (dungeon == nullptr)
+			throw 0;
+
+		player = new Player(name.getCharArray(), *dungeon);
+		if (player == nullptr)
+			throw 1;
+	}
+	catch (int error)
+	{
+		gameState = 0;
+		switch (error)
+		{
+			case 0: 
+				std::cout << "No Dungeon to allocate new Player!" << std::endl; break;
+			case 1:
+				delete dungeon;
+				std::cout << "Failed to allocate new Player!" << std::endl; break;
+		}
+	}
+	
 	std::cout << std::endl;
 }
 
@@ -121,7 +144,6 @@ void Application::handleOptions(int option)
 				case 1:
 					createNewDungeon();
 					createNewPlayer();
-					gameState = 1;
 					break;
 				case 2:
 					createNewDungeon();

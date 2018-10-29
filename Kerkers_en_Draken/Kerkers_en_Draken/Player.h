@@ -2,6 +2,8 @@
 
 #include "UserInterface.h"
 
+#define INV_SPACE 5
+
 class Item;
 class Room;
 class Layer;
@@ -25,7 +27,7 @@ class Player : public UserInterface
 		int defence;
 
 		StringClass* name;
-		Item* inventory[5];
+		Item* inventory[INV_SPACE];
 		Room* currentRoom;
 		Layer* currentLayer;
 		Dungeon* const dungeon;
