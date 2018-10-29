@@ -95,5 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="monsters.txt" />
+    <Text Include="hero.txt" />
   </ItemGroup>
 </Project>

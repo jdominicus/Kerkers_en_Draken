@@ -100,6 +100,7 @@ Room* Layer::getRooms(int index) const
 
 void Layer::print() const
 {
+	std::cout << "Layer: " << layerLevel << std::endl;
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include "StringClass.h"
 
 #define lineLength 100
 
@@ -13,9 +14,10 @@ public:
 	void openHeroFile();
 	void closeFile();
 	char* readInfo();
+	void writeInfo(char c);
 
 private:
-	std::ifstream file;
+	std::fstream file;
 	char info[lineLength];
 };
 

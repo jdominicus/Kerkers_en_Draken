@@ -144,6 +144,7 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="hero.txt" />
     <Text Include="monsters.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -62,3 +62,11 @@ char* FileHandler::readInfo()
 
 	return info;
 }
+
+void FileHandler::writeInfo(char c)
+{
+	if (file.is_open())
+	{
+		file.put(c);
+	}
+}

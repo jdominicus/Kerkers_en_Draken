@@ -5,6 +5,8 @@
 #include "StringClass.h"
 #include "MonsterFactory.h"
 #include "RandomNumberGenerator.h"
+#include "FileHandler.h"
+#include "Item.h"
 
 #include <iostream>
 
@@ -89,9 +91,29 @@ void Application::createNewPlayer()
 	std::cout << std::endl;
 }
 
-void Application::createCustomPlayer()
+void Application::loadPlayer()
 {
 
+}
+
+void Application::savePlayer()
+{
+	FileHandler* fH = new FileHandler();
+	StringClass* temp = new StringClass("");
+	temp = player->getName();
+	for (int i = 0; i < 5; i++)
+	{
+		fH->writeInfo(player->getAttributes(i) + 48);
+	}
+	for (int i = 0; i < INV_SPACE; i++)
+	{
+		c = player->getInventory(i)->getId() + 48;
+		temp->append(c);
+		temp->append(player->getInventory(i)->getName());
+		fH->writeInfo();
+		delete temp;
+	}
+	delete fH;
 }
 
 void Application::displayOptions() const
@@ -149,7 +171,7 @@ void Application::handleOptions(int option)
 					break;
 				case 2:
 					createNewDungeon();
-					createCustomPlayer();
+					loadPlayer();
 					gameState = 1;
 					break;
 				case 3:
@@ -167,7 +189,10 @@ void Application::handleOptions(int option)
 				case 5: player->displayInventory(); break;
 				case 6: player->displayCurrentLayer(); break;
 				case 7: player->displayStats(); break;
-				case 8: gameState = 0; break;
+				case 8:
+					gameState = 0;
+					savePlayer();
+					break;
 			}
 			break;
 		case 2:

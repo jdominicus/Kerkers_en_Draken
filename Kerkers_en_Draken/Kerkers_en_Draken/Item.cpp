@@ -39,3 +39,8 @@ const char* Item::getName() const
 {
 	return this->name->getCharArray();
 }
+
+int Item::getId() const
+{
+	return id;
+}

@@ -24,7 +24,8 @@ class Application : public UserInterface
 	private:
 		void createNewDungeon();
 		void createNewPlayer();
-		void createCustomPlayer();
+		void loadPlayer();
+		void savePlayer();
 
 		void displayOptions() const;
 		int handleUserInput() const;

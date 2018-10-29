@@ -48,5 +48,9 @@ class Player : public UserInterface
 		void displayStats() const;
 		void displayInventory() const;
 		void displayCurrentLayer() const;
+
+		int getAttributes(int index) const;
+		StringClass* getName() const;
+		Item* getInventory(int index) const;
 };
 

@@ -238,3 +238,31 @@ void Player::displayCurrentLayer() const
 {
 	currentLayer->print();
 }
+
+int Player::getAttributes(int index) const
+{
+	int attributes[6];
+	attributes[0] = level;
+	attributes[1] = hitpoints;
+	attributes[2] = maxHitpoints;
+	attributes[3] = experience;
+	attributes[4] = attack;
+	attributes[5] = defence;
+	if (index >= 0 && index <= 5)
+		return attributes[index];
+	else
+		return 0xFFFF;
+}
+
+StringClass* Player::getName() const
+{
+	return name;
+}
+
+Item* Player::getInventory(int index) const
+{
+	if (index >= 0 && index <= INV_SPACE)
+		return inventory[index];
+	else
+		return nullptr;
+}

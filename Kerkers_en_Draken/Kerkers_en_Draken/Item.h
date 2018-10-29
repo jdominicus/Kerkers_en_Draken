@@ -16,5 +16,6 @@ class Item
 	public:
 		void use(Player& player);
 		const char* getName() const;
+		int getId() const;
 };
 
