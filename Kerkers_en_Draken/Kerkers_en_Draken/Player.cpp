@@ -140,6 +140,7 @@ void Player::run()
 	currentRoom->destroyMonster();
 	currentRoom = currentRoom->getRoom(direction);
 	currentRoom->setVisited();
+	currentRoom->setMonster();
 	currentLayer = currentRoom->getLayer();
 	std::cout << std::endl;
 }

@@ -4,9 +4,9 @@
 
 #include <iostream>
 
-Layer::Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, Dungeon& dungeon) 
-	: width{ width }, height{ height }, minLevelMonsters{ minLevelMonsters }, maxLevelMonsters{ maxLevelMonsters }, dungeon{ &dungeon }, 
-	startRoom{ nullptr }, endRoom{ nullptr }
+Layer::Layer(int width, int height, Dungeon& dungeon, int layerLevel) 
+	: width{ width }, height{ height }, dungeon{ &dungeon }, 
+	layerLevel{ layerLevel }, startRoom{ nullptr }, endRoom{ nullptr }
 {
 	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
 
@@ -60,14 +60,9 @@ Layer::~Layer()
 	delete[] rooms;
 }
 
-int Layer::getMinLevelMonsters() const
+int Layer::getLayerLevel() const
 {
-	return this->minLevelMonsters;
-}
-
-int Layer::getMaxLevelMonsters() const
-{
-	return this->maxLevelMonsters;
+	return this->layerLevel;
 }
 
 Room* Layer::getStartRoom() const
@@ -134,4 +129,9 @@ void Layer::print() const
 
 		std::cout << std::endl;
 	}
+}
+
+Room* Layer::getDungeonEndRoom() const
+{
+	return dungeon->getEndRoom();
 }

@@ -1,30 +1,37 @@
 #include "MonsterFactory.h"
 
+MonsterFactory* MonsterFactory::mF = nullptr;
+
 MonsterFactory::MonsterFactory()
 {
-	nrOfMonsters = 0;
-	optionalMonsters = new Monster*[nrOfMonsters];
-	optionalMonsters[0] = nullptr;
+	FileHandler* fh = new FileHandler();
+	fh->openMonsterFile();
+
+	for (int i = 0; i < NR_OFMONSTERS; i++)
+	{
+		optionalMonsters[i] = createMonster(fh->readInfo());
+	}
+
+
+	fh->closeFile();
 }
 
 MonsterFactory::~MonsterFactory()
 {
 }
 
-void MonsterFactory::addMonster(char info[])
+MonsterFactory* MonsterFactory::getMF()
 {
-	if (optionalMonsters[nrOfMonsters] != nullptr)
-	{
-		resize();
-	}
-	for (int i = 0; i <= nrOfMonsters; i++)
-	{
-		if (optionalMonsters[i] == nullptr)
-		{
-			optionalMonsters[i] = createMonster(info);
-		}
-	}
-	
+	if (mF == nullptr)
+		mF = new MonsterFactory();
+
+	return mF;
+}
+
+void MonsterFactory::removeMF()
+{
+	if (mF != nullptr)
+		delete mF;
 }
 
 Monster* MonsterFactory::createMonster(char info[])
@@ -162,16 +169,42 @@ Monster* MonsterFactory::createMonster(char info[])
 	return monster;
 }
 
-void MonsterFactory::resize()
+Monster* MonsterFactory::getBoss() const
 {
-	Monster** temp = new Monster*[nrOfMonsters + 1];
-	for (int i = 0; i < nrOfMonsters; i++)
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+	if (random->getBool(50))
 	{
-		temp[i] = optionalMonsters[i];
+		return optionalMonsters[12];
+	}
+	else
+	{
+		return optionalMonsters[13];
+	}
+}
+
+Monster* MonsterFactory::getMonster(int layer) const
+{
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+	int nr = 0;
+	int startPos = 0;
+	for (int i = 0; i < NR_OFMONSTERS; i++)
+	{
+		if (optionalMonsters[i]->getLevel() == layer)
+		{
+			if (startPos == 0)
+			{
+				startPos = i;
+			}
+			nr++;
+		}
 	}
 
-	nrOfMonsters++;
-	optionalMonsters = temp;
-	optionalMonsters[nrOfMonsters] = nullptr;
-	delete[] temp;
+	if (random->getBool(50 + layer * 5))
+	{
+		return optionalMonsters[startPos + random->getNumber(0, nr)];
+	}
+	else
+	{
+		return nullptr;
+	}
 }

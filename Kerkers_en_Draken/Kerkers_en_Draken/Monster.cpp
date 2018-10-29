@@ -14,3 +14,8 @@ Monster::Monster(char name[], int level, int attack, int nrOfAttacks,
 Monster::~Monster()
 {
 }
+
+int Monster::getLevel() const
+{
+	return level;
+}

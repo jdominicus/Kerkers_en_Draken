@@ -40,6 +40,7 @@ class Room
 		void setRoom(int index, Room* room);
 		Item* getItem() const;
 		void removeItem();
+		void setMonster();
 		Monster* getMonster() const;
 		void destroyMonster();
 		Layer* getLayer() const;
