@@ -122,7 +122,7 @@
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="MyException.cpp" />
+    <ClCompile Include="MonsterFactory.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -136,7 +136,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Monster.h" />
-    <ClInclude Include="MyException.h" />
+    <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="Room.h" />

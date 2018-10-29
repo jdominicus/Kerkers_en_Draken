@@ -1,10 +1,18 @@
 #pragma once
+#include <iostream>
+#include <fstream>
+#include "MonsterFactory.h"
+
 class FileReader
 {
 public:
 	FileReader();
 	~FileReader();
 	void openFile();
-	char* readLine();
+	void readLine();
+
+private:
+	std::ifstream file;
+	MonsterFactory* mf;
 };
 

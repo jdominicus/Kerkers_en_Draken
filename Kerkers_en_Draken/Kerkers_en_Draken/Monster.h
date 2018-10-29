@@ -2,17 +2,19 @@
 class Monster
 {
 	public:
-		Monster();
+		Monster(char name[], int level, int attack, int nrOfAttacks,
+					int strengthMin, int strengthMax, int defence, int hp);
 		~Monster();
 
 	private:
-		//const char name[30];		//naam max 30 karakters
-		//const int level;			//1-10 gevaarlijkheid / BAAS voor eindbaas
-		int attack;					//percentage voor hitrate
-		//const int strengthMin;		//minimum schadepunten
-		int strengthMax;			//maximum schadepunten
-		int defence;				//percentage voor ontwijken
-		int hp;						//levenspunten
+		char name[30];				//naam max 30 karakters
+		const int level;			//1-10 gevaarlijkheid / 25 voor eindbaas
+		int attack;					//0-100 percentage voor hitrate
+		const int nrOfAttacks;		//1-9 aantal keren dat het monster aanvalt
+		const int strengthMin;		//0-9 minimum schadepunten
+		int strengthMax;			//1-99 maximum schadepunten
+		int defence;				//10-99 percentage voor ontwijken
+		int hp;						//1-999 levenspunten
 };
 
 /*
