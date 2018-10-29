@@ -1,4 +1,5 @@
 #include "MonsterFactory.h"
+#include "StringClass.h"
 
 MonsterFactory* MonsterFactory::mF = nullptr;
 
@@ -8,16 +9,16 @@ MonsterFactory::MonsterFactory()
 	fh->openMonsterFile();
 
 	for (int i = 0; i < NR_OFMONSTERS; i++)
-	{
 		optionalMonsters[i] = createMonster(fh->readInfo());
-	}
-
 
 	fh->closeFile();
+	delete fh;
 }
 
 MonsterFactory::~MonsterFactory()
 {
+	for (int i = 0; i < NR_OFMONSTERS; i++)
+		delete optionalMonsters[i];
 }
 
 MonsterFactory* MonsterFactory::getMF()
@@ -36,14 +37,14 @@ void MonsterFactory::removeMF()
 
 Monster* MonsterFactory::createMonster(char info[])
 {
-	char name[30];				//naam max 30 karakters
-	int level = 0;				//1-10 gevaarlijkheid / 25 voor eindbaas
-	int attack = 0;				//0-100 percentage voor hitrate
-	int nrOfAttacks = 0;		//1-9 aantal keren dat het monster aanvalt
-	int strengthMin = 0;		//0-9 minimum schadepunten
-	int strengthMax = 0;		//1-99 maximum schadepunten
-	int defence = 0;			//10-99 percentage voor ontwijken
-	int hp = 0;					//1-999 levenspunten
+	StringClass* name = new StringClass("");		//naam max 30 karakters
+	int level = 0;									//1-10 gevaarlijkheid / 25 voor eindbaas
+	int attack = 0;									//0-100 percentage voor hitrate
+	int nrOfAttacks = 0;							//1-9 aantal keren dat het monster aanvalt
+	int strengthMin = 0;							//0-9 minimum schadepunten
+	int strengthMax = 0;							//1-99 maximum schadepunten
+	int defence = 0;								//10-99 percentage voor ontwijken
+	int hp = 0;										//1-999 levenspunten
 
 	int attribute = 0;
 
@@ -61,8 +62,12 @@ Monster* MonsterFactory::createMonster(char info[])
 		switch (attribute)
 		{
 		case(0):	//name
-			name[i] = info[i];
+		{
+			const char* letter = new char[2]{ info[i], '\0' };
+			name->append(letter);
+			delete[] letter;
 			break;
+		}
 		case(1):	//level
 			if (info[i] == 'B')
 			{
@@ -164,8 +169,7 @@ Monster* MonsterFactory::createMonster(char info[])
 		}
 	}
 
-	Monster* monster = new Monster(name, level, attack, nrOfAttacks,
-										strengthMin, strengthMax, defence, hp);
+	Monster* monster = new Monster(name, level, attack, nrOfAttacks, strengthMin, strengthMax, defence, hp);
 	return monster;
 }
 
@@ -173,13 +177,9 @@ Monster* MonsterFactory::getBoss() const
 {
 	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
 	if (random->getBool(50))
-	{
-		return optionalMonsters[12];
-	}
+		return new Monster(*(optionalMonsters[12]));
 	else
-	{
-		return optionalMonsters[13];
-	}
+		return new Monster(*(optionalMonsters[13]));
 }
 
 Monster* MonsterFactory::getMonster(int layer) const
@@ -192,19 +192,17 @@ Monster* MonsterFactory::getMonster(int layer) const
 		if (optionalMonsters[i]->getLevel() == layer)
 		{
 			if (startPos == 0)
-			{
 				startPos = i;
-			}
+
 			nr++;
 		}
 	}
 
 	if (random->getBool(50 + layer * 5))
 	{
-		return optionalMonsters[startPos + random->getNumber(0, nr)];
+		Monster* m1 = new Monster(*(optionalMonsters[startPos + random->getNumber(0, nr)]));
+		return m1;
 	}
 	else
-	{
 		return nullptr;
-	}
 }

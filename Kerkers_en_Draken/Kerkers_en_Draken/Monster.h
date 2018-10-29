@@ -1,13 +1,16 @@
 #pragma once
+
+class StringClass;
+
 class Monster
 {
 	public:
-		Monster(char name[], int level, int attack, int nrOfAttacks,
-					int strengthMin, int strengthMax, int defence, int hp);
+		Monster(StringClass* name, int level, int attack, int nrOfAttacks, int strengthMin, int strengthMax, int defence, int hp);
 		~Monster();
+		Monster(const Monster& other);
 
 	private:
-		char name[30];				//naam max 30 karakters
+		StringClass* name;			//naam max 30 karakters
 		const int level;			//1-10 gevaarlijkheid / 25 voor eindbaas
 		int attack;					//0-100 percentage voor hitrate
 		const int nrOfAttacks;		//1-9 aantal keren dat het monster aanvalt
@@ -17,5 +20,8 @@ class Monster
 		int hp;						//1-999 levenspunten
 
 	public:
+		const char* getName() const;
 		int getLevel() const;
+		void reduceHealth(int health);
+		int getHealth() const;
 };

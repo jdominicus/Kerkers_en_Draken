@@ -3,7 +3,6 @@
 #include "Monster.h"
 #include "Layer.h"
 #include "StringClass.h"
-#include "MyException.h"
 #include "RandomNumberGenerator.h"
 #include "MonsterFactory.h"
 
@@ -97,14 +96,11 @@ void Room::removeItem()
 void Room::setMonster()
 {
 	MonsterFactory* mF = MonsterFactory::getMF();
-	if (endRoom && this == this->getLayer()->getDungeonEndRoom())
-	{
+
+	if (this == this->layer->getDungeonEndRoom())
 		monster = mF->getBoss();
-	}
 	else
-	{
 		monster = mF->getMonster(getLayer()->getLayerLevel());
-	}
 }
 
 Monster* Room::getMonster() const
@@ -115,7 +111,10 @@ Monster* Room::getMonster() const
 void Room::destroyMonster()
 {
 	if (monster != nullptr)
+	{
 		delete monster;
+		monster = nullptr;
+	}
 }
 
 Layer* Room::getLayer() const
@@ -136,7 +135,7 @@ void Room::print() const
 	std::cout << "Monster: ";
 
 	if (monster != nullptr)
-		std::cout << "Ja" << std::endl;
+		std::cout << monster->getName() << " Level: " << monster->getLevel() << std::endl;
 	else
 		std::cout << "-" << std::endl;
 

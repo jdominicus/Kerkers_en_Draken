@@ -43,6 +43,7 @@ class Player : public UserInterface
 
 		void addExperience(int experience);
 		void changeStats(int hitpoints, int attack, int defence);
+		int getHealth() const;
 
 		void displayStats() const;
 		void displayInventory() const;

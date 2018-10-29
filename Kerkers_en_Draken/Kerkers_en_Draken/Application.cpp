@@ -3,6 +3,7 @@
 #include "Room.h"
 #include "Player.h"
 #include "StringClass.h"
+#include "MonsterFactory.h"
 #include "RandomNumberGenerator.h"
 
 #include <iostream>
@@ -20,6 +21,7 @@ Application::~Application()
 		delete player;
 
 	RandomNumberGenerator::removeRandom();
+	MonsterFactory::removeMF();
 }
 
 void Application::start()
@@ -171,7 +173,10 @@ void Application::handleOptions(int option)
 		case 2:
 			switch (option)
 			{
-				case 1: player->fight(); break;
+				case 1: player->fight(); 
+					if (player->getHealth() == 0)
+						gameState = 0;
+						break;
 				case 2: player->run(); 
 						gameState = 1; break;
 				case 3: player->useItem(); break;

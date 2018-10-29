@@ -3,6 +3,7 @@
 #include "Room.h"
 #include "Layer.h"
 #include "Dungeon.h"
+#include "Monster.h"
 #include "StringClass.h"
 #include "RandomNumberGenerator.h"
 
@@ -110,6 +111,7 @@ void Player::rest()
 	if (currentRoom->getMonster() == nullptr && random->getBool(50))
 	{
 		std::cout << "A new monster appeared in the room while you were resting..." << std::endl;
+		currentRoom->setMonster();
 	}
 
 	std::cout << std::endl;
@@ -117,7 +119,42 @@ void Player::rest()
 
 void Player::fight()
 {
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+	Monster* monster = currentRoom->getMonster();
 
+	if (monster == nullptr)
+	{
+		std::cout << "There is no monster to fight!" << std::endl << std::endl;
+		return;
+	}
+
+	int damage = 0;
+	if (random->getBool(attack * 10))
+		damage = random->getNumber(0, attack);
+	monster->reduceHealth(damage);
+	
+	std::cout << "You hit the " << monster->getName() << " for " << damage << " damage!" << std::endl;
+	if (monster->getHealth() <= 0)
+	{
+		std::cout << "You killed the monster!" << std::endl << std::endl;
+		addExperience(50);
+		currentRoom->destroyMonster();
+		return;
+	}
+
+	if (random->getBool(attack * 50))
+		damage = random->getNumber(0, attack);
+	this->hitpoints = this->hitpoints - damage;
+
+	std::cout << "The " << monster->getName() << " hits you for " << damage << " damage!" << std::endl;
+	if (hitpoints <= 0)
+	{
+		std::cout << "You died!" << std::endl << std::endl;
+		return;
+	}
+
+	std::cout << "Player hitpoints: " << this->hitpoints << std::endl;
+	std::cout << monster->getName() << " hitpoints: " << monster->getHealth() << std::endl << std::endl;
 }
 
 void Player::run()
@@ -165,6 +202,11 @@ void Player::changeStats(int hitpoints, int attack, int defence)
 
 	if (hitpoints > maxHitpoints)
 		hitpoints = maxHitpoints;
+}
+
+int Player::getHealth() const
+{
+	return this->hitpoints;
 }
 
 void Player::displayStats() const

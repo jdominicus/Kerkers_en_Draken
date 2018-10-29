@@ -11,10 +11,12 @@ FileHandler::~FileHandler()
 void FileHandler::openMonsterFile()
 {
 	file.exceptions(std::ifstream::badbit); // No need to check failbit
-	try {
+	try 
+	{
 		file.open("monsters.txt");
 	}
-	catch (const std::ifstream::failure& e) {
+	catch (const std::ifstream::failure& e) 
+	{
 		std::cout << "Exception opening/reading file";
 	}
 }
@@ -22,10 +24,12 @@ void FileHandler::openMonsterFile()
 void FileHandler::openHeroFile()
 {
 	file.exceptions(std::ifstream::badbit); // No need to check failbit
-	try {
+	try 
+	{
 		file.open("hero.txt");
 	}
-	catch (const std::ifstream::failure& e) {
+	catch (const std::ifstream::failure& e) 
+	{
 		std::cout << "Exception opening/reading file";
 	}
 }
@@ -47,12 +51,10 @@ char* FileHandler::readInfo()
 			while (ch != ']')
 			{
 				info[i] = ch;
-				std::cout << ch;
 				ch = file.get();
 				i++;
 			}
 			info[i] = ch;
-			std::cout << std::endl;
 			return info;
 		}
 		ch = file.get();
