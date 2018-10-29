@@ -10,6 +10,7 @@ public:
 	FileHandler();
 	~FileHandler();
 	void openMonsterFile();
+	void openHeroFile();
 	void closeFile();
 	char* readInfo();
 

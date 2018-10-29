@@ -20,6 +20,17 @@ void FileHandler::openMonsterFile()
 	}
 }
 
+void FileHandler::openHeroFile()
+{
+	file.exceptions(std::ifstream::badbit); // No need to check failbit
+	try {
+		file.open("hero.txt");
+	}
+	catch (const std::ifstream::failure& e) {
+		std::cout << "Exception opening/reading file";
+	}
+}
+
 void FileHandler::closeFile()
 {
 	file.close();
