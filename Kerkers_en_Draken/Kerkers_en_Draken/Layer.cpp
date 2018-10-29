@@ -135,3 +135,8 @@ void Layer::print() const
 		std::cout << std::endl;
 	}
 }
+
+Room* Layer::getDungeonEndRoom() const
+{
+	return dungeon->getEndRoom();
+}

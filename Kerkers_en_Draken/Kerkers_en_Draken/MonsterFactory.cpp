@@ -1,5 +1,7 @@
 #include "MonsterFactory.h"
 
+MonsterFactory* MonsterFactory::mF = nullptr;
+
 MonsterFactory::MonsterFactory()
 {
 	nrOfMonsters = 0;
@@ -11,20 +13,18 @@ MonsterFactory::~MonsterFactory()
 {
 }
 
-void MonsterFactory::addMonster(char info[])
+MonsterFactory* MonsterFactory::getMF()
 {
-	if (optionalMonsters[nrOfMonsters] != nullptr)
-	{
-		resize();
-	}
-	for (int i = 0; i <= nrOfMonsters; i++)
-	{
-		if (optionalMonsters[i] == nullptr)
-		{
-			optionalMonsters[i] = createMonster(info);
-		}
-	}
-	
+	if (mF == nullptr)
+		mF = new MonsterFactory();
+
+	return mF;
+}
+
+void MonsterFactory::removeMF()
+{
+	if (mF != nullptr)
+		delete mF;
 }
 
 Monster* MonsterFactory::createMonster(char info[])
@@ -162,16 +162,15 @@ Monster* MonsterFactory::createMonster(char info[])
 	return monster;
 }
 
-void MonsterFactory::resize()
+Monster* MonsterFactory::getBoss() const
 {
-	Monster** temp = new Monster*[nrOfMonsters + 1];
-	for (int i = 0; i < nrOfMonsters; i++)
+	RandomNumberGenerator* random = RandomNumberGenerator::getRandom();
+	if (random->getBool(50))
 	{
-		temp[i] = optionalMonsters[i];
+		return optionalMonsters[12];
 	}
-
-	nrOfMonsters++;
-	optionalMonsters = temp;
-	optionalMonsters[nrOfMonsters] = nullptr;
-	delete[] temp;
+	else
+	{
+		return optionalMonsters[13];
+	}
 }

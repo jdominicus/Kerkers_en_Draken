@@ -1,4 +1,5 @@
 #pragma once
+#include "Dungeon.h"
 
 class Room;
 class Dungeon;
@@ -29,5 +30,6 @@ class Layer
 		void setEndRoom(int index);
 		Room* getRooms(int index) const;
 		void print() const;
+		Room* getDungeonEndRoom() const;
 };
 

@@ -5,6 +5,7 @@
 #include "StringClass.h"
 #include "MyException.h"
 #include "RandomNumberGenerator.h"
+#include "MonsterFactory.h"
 
 #include <iostream>
 
@@ -16,6 +17,7 @@ Room::Room(Layer& layer)
 	size = random->getNumber(1, 3);
 	layout = random->getNumber(1, 3);
 	
+	//setMonster();
 	createDescription();
 	createItem();
 }
@@ -91,6 +93,20 @@ Item* Room::getItem() const
 void Room::removeItem()
 {
 	this->item = nullptr;
+}
+
+void Room::setMonster()
+{
+	MonsterFactory* mF = MonsterFactory::getMF();
+	if (endRoom && this == this->getLayer()->getDungeonEndRoom())
+	{
+		mF->getBoss();
+	}
+	//end room laatste layer?
+	//	kies een boss
+	//anders
+	//	random->bool
+	//		kijk tussen lijst, op layer een monster kopiëren
 }
 
 Monster* Room::getMonster() const

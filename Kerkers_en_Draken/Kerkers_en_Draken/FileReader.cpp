@@ -4,7 +4,6 @@
 
 FileReader::FileReader()
 {
-	mf = new MonsterFactory();
 }
 
 FileReader::~FileReader()
