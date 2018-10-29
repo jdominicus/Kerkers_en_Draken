@@ -35,7 +35,7 @@ void Item::use(Player& player)
 	}
 }
 
-const char* Item::getName()
+const char* Item::getName() const
 {
 	return this->name->getCharArray();
 }

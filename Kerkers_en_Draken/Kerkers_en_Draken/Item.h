@@ -10,11 +10,11 @@ class Item
 		~Item();
 
 	private:
-		int id;
-		StringClass* name;
+		const int id;
+		const StringClass* const name;
 
 	public:
 		void use(Player& player);
-		const char* getName();
+		const char* getName() const;
 };
 

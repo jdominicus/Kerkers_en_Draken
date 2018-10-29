@@ -1,9 +1,6 @@
 #include "RandomNumberGenerator.h"
 #include "Application.h"
 
-#include "StringClass.h"
-#include "UserInterface.h"
-
 #define _CRTDBG_MAP_ALLOC  
 #include <stdlib.h>  
 #include <crtdbg.h>
@@ -12,8 +9,18 @@
 int main()
 {
 	{
-		Application application;
-		application.start();
+		try
+		{
+			Application application;
+			application.start();
+		}
+		catch (int error)
+		{
+			switch (error)
+			{
+				case 0: std::cout << "Bad allocation error!" << std::endl;
+			}
+		}
 	}
 
 	_CrtDumpMemoryLeaks();

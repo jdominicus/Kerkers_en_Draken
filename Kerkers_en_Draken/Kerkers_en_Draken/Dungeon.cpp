@@ -11,8 +11,23 @@ Dungeon::Dungeon(int width, int height, int depth) : width{ width }, height{ hei
 
 	layers = new Layer*[depth];
 	for (int i = 0; i < depth; i++)
-		layers[i] = new Layer(width, height, i, i, *this);
+	{
+		try
+		{
+			layers[i] = new Layer(width, height, i, i, *this);
+			if (layers[i] == nullptr)
+				throw 0;
+		}
+		catch (int error)
+		{
+			for (int j = 0; j < i; j++)
+				delete layers[j];
 
+			std::cout << "Failed to allocate new Layers!" << std::endl;
+			throw 0;
+		}	
+	}
+		
 	int indexStartRoom = random->getNumber(0, (width * height - 1));
 	int indexEndRoom = random->getDifferentNumber(0, (width * height - 1), indexStartRoom);
 		
@@ -46,7 +61,7 @@ Dungeon::~Dungeon()
 	delete[] layers;
 }
 
-Layer* Dungeon::getLayer(int index)
+Layer* Dungeon::getLayer(int index) const
 {
 	if (index >= 0 && index <= (depth - 1))
 		return layers[index];
@@ -54,17 +69,17 @@ Layer* Dungeon::getLayer(int index)
 		return nullptr;
 }
 
-Room* Dungeon::getStartRoom()
+Room* Dungeon::getStartRoom() const
 {
 	return this->startRoom;
 }
 
-Room* Dungeon::getEndRoom()
+Room* Dungeon::getEndRoom() const
 {
 	return this->endRoom;
 }
 
-void Dungeon::print()
+void Dungeon::print() const
 {
 	for (int i = 0; i < depth; i++)
 	{

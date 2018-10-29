@@ -25,14 +25,14 @@ class Player : public UserInterface
 		int defence;
 
 		StringClass* name;
+		Item* inventory[5];
 		Room* currentRoom;
 		Layer* currentLayer;
-		Dungeon* dungeon;
-		Item* inventory[5];
+		Dungeon* const dungeon;
 
 	public:
-		Room* getCurrentRoom();
-		Layer* getLayer();
+		Room* getCurrentRoom() const;
+		Layer* getLayer() const;
 		void pickUpItem();
 		void useItem();
 		void rest();
@@ -42,8 +42,8 @@ class Player : public UserInterface
 		void addExperience(int experience);
 		void changeStats(int hitpoints, int attack, int defence);
 
-		void displayStats();
-		void displayInventory();
-		void displayCurrentLayer();
+		void displayStats() const;
+		void displayInventory() const;
+		void displayCurrentLayer() const;
 };
 

@@ -21,12 +21,12 @@ StringClass::StringClass(const StringClass& other)
 	this->charArray = newString;
 }
 
-const char* StringClass::getCharArray()
+const char* StringClass::getCharArray() const
 {
 	return this->charArray;
 }
 
-int StringClass::getLength()
+int StringClass::getLength() const
 {
 	return strlen(charArray);
 }
@@ -47,9 +47,4 @@ void StringClass::empty()
 	char* newString = new char[1];
 	newString[0] = '\0';
 	charArray = newString;
-}
-
-void StringClass::print()
-{
-	std::cout << charArray;
 }

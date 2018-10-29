@@ -3,6 +3,7 @@
 #include "Monster.h"
 #include "Layer.h"
 #include "StringClass.h"
+#include "MyException.h"
 #include "RandomNumberGenerator.h"
 
 #include <iostream>
@@ -58,17 +59,17 @@ bool Room::isVisited()
 	return this->visited;
 }
 
-char Room::getRoomType()
+char Room::getRoomType() const
 {
 	return this->roomType;
 }
 
-StringClass* Room::getDescription()
+StringClass* Room::getDescription() const
 {
 	return this->description;
 }
 
-Room* Room::getRoom(int index)
+Room* Room::getRoom(int index) const
 {
 	if (index >= 0 && index <= 5)
 		return rooms[index];
@@ -82,7 +83,7 @@ void Room::setRoom(int index, Room* room)
 		rooms[index] = room;
 }
 
-Item* Room::getItem()
+Item* Room::getItem() const
 {
 	return this->item;
 }
@@ -92,7 +93,7 @@ void Room::removeItem()
 	this->item = nullptr;
 }
 
-Monster* Room::getMonster() 
+Monster* Room::getMonster() const
 {
 	return this->monster;
 }
@@ -103,12 +104,12 @@ void Room::destroyMonster()
 		delete monster;
 }
 
-Layer* Room::getLayer()
+Layer* Room::getLayer() const
 {
 	return this->layer;
 }
 
-void Room::print()
+void Room::print() const
 {
 	std::cout << description->getCharArray() << std::endl;
 	std::cout << "Item: ";

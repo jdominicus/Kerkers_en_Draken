@@ -8,7 +8,7 @@ class UserInterface
 		UserInterface();
 		~UserInterface();
 		
-		int getInputInt(const char* message, int min, int max);
-		StringClass getInputString(const char* message, int min, int max);
+		int getInputInt(const char* message, int min, int max) const;
+		StringClass getInputString(const char* message, int min, int max) const;
 };
 

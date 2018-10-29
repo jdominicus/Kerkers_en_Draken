@@ -26,8 +26,8 @@ class Application : public UserInterface
 		void createNewPlayer();
 		void createCustomPlayer();
 
-		void displayOptions();
-		int handleUserInput();
+		void displayOptions() const;
+		int handleUserInput() const;
 		void handleOptions(int option);
 };
 

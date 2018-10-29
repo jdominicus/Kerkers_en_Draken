@@ -11,7 +11,7 @@ UserInterface::~UserInterface()
 {
 }
 
-int UserInterface::getInputInt(const char* message, int min, int max)
+int UserInterface::getInputInt(const char* message, int min, int max) const
 {
 	std::cout << message;
 	int input;
@@ -29,7 +29,7 @@ int UserInterface::getInputInt(const char* message, int min, int max)
 	}
 }
 
-StringClass UserInterface::getInputString(const char* message, int min, int max)
+StringClass UserInterface::getInputString(const char* message, int min, int max) const
 {
 	std::cout << message;
 	StringClass input("");

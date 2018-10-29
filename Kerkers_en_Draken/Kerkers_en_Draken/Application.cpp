@@ -42,7 +42,16 @@ void Application::createNewDungeon()
 	int height = getInputInt("Height: ", 2, 10);
 	int depth = getInputInt("Depth: ", 2, 10);
 
-	dungeon = new Dungeon(width, height, depth);
+	try
+	{
+		dungeon = new Dungeon(width, height, depth);
+		if (dungeon == nullptr)
+			throw 0;
+	}
+	catch (int error)
+	{
+		std::cout << "Failed to allocate new Dungeon!" << std::endl;
+	}
 }
 
 void Application::createNewPlayer()
@@ -60,7 +69,7 @@ void Application::createCustomPlayer()
 
 }
 
-void Application::displayOptions()
+void Application::displayOptions() const
 {
 	switch (gameState)
 	{
@@ -91,13 +100,14 @@ void Application::displayOptions()
 	}
 }
 
-int Application::handleUserInput()
+int Application::handleUserInput() const
 {
 	switch (gameState)
 	{
 		case 0: return getInputInt("Option: ", 1, 3);
 		case 1: return getInputInt("Action: ", 1, 8);
 		case 2: return getInputInt("Action: ", 1, 3);
+		default: return 0;
 	}
 }
 

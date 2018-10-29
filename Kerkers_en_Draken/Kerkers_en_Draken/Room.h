@@ -24,26 +24,26 @@ class Room
 		char roomType;
 
 		Room* rooms[6]; // North - East - South - West - Up - Down
-		Layer* layer;
 		Item* item;
 		Monster* monster;
 		StringClass* description;
+		Layer* const layer;
 
 	public:
 		void setStartRoom();
 		void setEndRoom();
 		void setVisited();
 		bool isVisited();
-		char getRoomType();
-		StringClass* getDescription();
-		Room* getRoom(int index);
+		char getRoomType() const;
+		StringClass* getDescription() const;
+		Room* getRoom(int index) const;
 		void setRoom(int index, Room* room);
-		Item* getItem();
+		Item* getItem() const;
 		void removeItem();
-		Monster* getMonster();
+		Monster* getMonster() const;
 		void destroyMonster();
-		Layer* getLayer();
-		void print();
+		Layer* getLayer() const;
+		void print() const;
 
 	private:
 		void createDescription();

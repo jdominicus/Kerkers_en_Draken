@@ -11,18 +11,18 @@ class Dungeon
 		~Dungeon();
 
 	private:
-		int width;
-		int height;
-		int depth;
+		const int width;
+		const int height;
+		const int depth;
 
 		Layer** layers;
 		Room* startRoom;
 		Room* endRoom;
 
 	public:
-		Layer* getLayer(int index);
-		Room* getStartRoom();
-		Room* getEndRoom();
-		void print();
+		Layer* getLayer(int index) const;
+		Room* getStartRoom() const;
+		Room* getEndRoom() const;
+		void print() const;
 };
 

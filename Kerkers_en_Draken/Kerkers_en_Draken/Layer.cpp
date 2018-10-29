@@ -12,8 +12,23 @@ Layer::Layer(int width, int height, int minLevelMonsters, int maxLevelMonsters, 
 
 	rooms = new Room*[width * height];
 	for (int i = 0; i < (width * height); i++)
-		rooms[i] = new Room(*this);
+	{
+		try
+		{
+			rooms[i] = new Room(*this);
+			if (rooms[i] == nullptr)
+				throw 0;
+		}
+		catch (int error)
+		{
+			for (int j = 0; j < i; j++)
+				delete rooms[j];
 
+			std::cout << "Failed to allocate new Rooms!" << std::endl;
+			throw 0;
+		}
+	}
+		
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < (width - 1); j++)
@@ -45,17 +60,17 @@ Layer::~Layer()
 	delete[] rooms;
 }
 
-int Layer::getMinLevelMonsters()
+int Layer::getMinLevelMonsters() const
 {
 	return this->minLevelMonsters;
 }
 
-int Layer::getMaxLevelMonsters()
+int Layer::getMaxLevelMonsters() const
 {
 	return this->maxLevelMonsters;
 }
 
-Room* Layer::getStartRoom()
+Room* Layer::getStartRoom() const
 {
 	return this->startRoom;
 }
@@ -69,7 +84,7 @@ void Layer::setStartRoom(int index)
 	}
 }
 
-Room* Layer::getEndRoom()
+Room* Layer::getEndRoom() const
 {
 	return this->endRoom;
 }
@@ -83,12 +98,12 @@ void Layer::setEndRoom(int index)
 	}
 }
 
-Room* Layer::getRooms(int index)
+Room* Layer::getRooms(int index) const
 {
 	return (index >= 0 && index <= (width * height - 1) ? rooms[index] : nullptr);
 }
 
-void Layer::print()
+void Layer::print() const
 {
 	for (int i = 0; i < height; i++)
 	{

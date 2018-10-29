@@ -30,18 +30,21 @@ Player::~Player()
 	delete name;
 }
 
-Room* Player::getCurrentRoom()
+Room* Player::getCurrentRoom() const
 {
 	return this->currentRoom;
 }
 
-Layer* Player::getLayer()
+Layer* Player::getLayer() const
 {
 	return this->currentLayer;
 }
 
 void Player::pickUpItem()
 {
+	Room* hoi = nullptr;
+	hoi->destroyMonster();
+
 	if (currentRoom != nullptr && currentRoom->getItem() != nullptr)
 	{
 		for (int i = 0; i < 5; i++)
@@ -63,10 +66,8 @@ void Player::useItem()
 {
 	bool hasItem = false;
 	for (int i = 0; i < 5; i++)
-	{
 		if (inventory[i] != nullptr)
 			hasItem = true;
-	}
 
 	if (!hasItem)
 	{
@@ -168,7 +169,7 @@ void Player::changeStats(int hitpoints, int attack, int defence)
 		hitpoints = maxHitpoints;
 }
 
-void Player::displayStats()
+void Player::displayStats() const
 {
 	std::cout << "Player: " << this->name->getCharArray() << std::endl;
 	std::cout << "Level: " << this->level << std::endl;
@@ -178,7 +179,7 @@ void Player::displayStats()
 	std::cout << "Deffence: " << this->defence << std::endl << std::endl;
 }
 
-void Player::displayInventory()
+void Player::displayInventory() const
 {
 	std::cout << "Inventory:" << std::endl;
 
@@ -193,7 +194,7 @@ void Player::displayInventory()
 	std::cout << std::endl;
 }
 
-void Player::displayCurrentLayer()
+void Player::displayCurrentLayer() const
 {
 	currentLayer->print();
 }

@@ -10,10 +10,9 @@ class StringClass
 		const char* charArray;
 
 	public:
-		const char* getCharArray();
-		int getLength();
+		const char* getCharArray() const;
+		int getLength() const;
 		void append(const char* string);
 		void empty();
-		void print();
 };
 
