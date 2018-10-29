@@ -2,7 +2,7 @@
 
 Monster::Monster(char name[], int level, int attack, int nrOfAttacks,
 	int strengthMin, int strengthMax, int defence, int hp)
-	:level{ level }, nrOfAttacks{ nrOfAttacks }, strengthMin{ strengthMin },
+	:level{ level }, attack{ attack }, nrOfAttacks{ nrOfAttacks }, strengthMin{ strengthMin },
 	strengthMax{ strengthMax }, defence{ defence }, hp{ hp }
 {
 	for (int i = 0; i < 30; i++)

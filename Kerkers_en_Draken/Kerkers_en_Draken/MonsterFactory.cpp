@@ -2,7 +2,7 @@
 
 MonsterFactory::MonsterFactory()
 {
-	for (int i = 0; i < NR_OFMONSTERS - 1; i++)
+	for (int i = 0; i < NR_OFMONSTERS; i++)
 	{
 		optionalMonsters[i] = nullptr;
 	}
@@ -18,7 +18,7 @@ void MonsterFactory::addMonster(char info[])
 	//{
 	//	resize();
 	//}
-	for (int i = 0; i <= NR_OFMONSTERS; i++)
+	for (int i = 0; i < NR_OFMONSTERS; i++)
 	{
 		if (optionalMonsters[i] == nullptr)
 		{
@@ -47,6 +47,7 @@ Monster* MonsterFactory::createMonster(char info[])
 		if (info[i] == ';')
 		{
 			attribute++;
+			i++;
 		}
 		if (info[i] == ']')
 		{
@@ -62,32 +63,36 @@ Monster* MonsterFactory::createMonster(char info[])
 			if (info[i] == 'B')
 			{
 				level = 25;
+				attribute++;
+				i = i + 4;
 			}
 			else if (info[i + 1] != ';')
 			{
 				level = 10;
+				attribute++;
+				i = i + 2;
 			}
 			else
 			{
-				level = info[i];
+				level = info[i] - 48;	//begin of numbers in ASCII
 			}
 			break;
 		case(2):	//attack
-			char attack1, attack2;
-			attack1 = info[i];
+			int attack1, attack2;
+			attack1 = info[i] - 48;
 				if (info[i + 1] != 'x')
 				{
-					attack2 = info[i + 1];
+					attack2 = info[i + 1] - 48;
 					if (info[i + 2] != 'x')
 					{
 						attack = 100;
-						i = i + 2;
+						i = i + 3;
 						attribute++;
 					}
 					else
 					{
 						attack = (attack1 * 10) + attack2;
-						i++;
+						i = i + 2;
 						attribute++;
 					}
 				}
@@ -95,24 +100,23 @@ Monster* MonsterFactory::createMonster(char info[])
 				{
 					attack = attack1;
 					attribute++;
+					i = i + 2;
 				}
 			break;
 		case(3):	//nrOfAttacks (max 9)
-			nrOfAttacks = info[i];
+			nrOfAttacks = info[i] - 48;
 			break;
 		case(4):	//strengthMin
-			strengthMin = info[i];
-			if (info[i] == '-')
-			{
-				attribute++;
-			}
+			strengthMin = info[i] - 48;
+			attribute++;
+			i++;
 			break;
 		case(5):	//strengthMax
-			char strength1, strength2;
-			strength1 = info[i];
+			int strength1, strength2;
+			strength1 = info[i] - 48;
 			if (info[i + 1] != ';')
 			{
-				strength2 = info[i + 1];
+				strength2 = info[i + 1] - 48;
 				strengthMax = (strength1 * 10) + strength2;
 				i++;
 			}
@@ -122,21 +126,21 @@ Monster* MonsterFactory::createMonster(char info[])
 			}
 			break;
 		case(6):	//defence
-			char defence1, defence2;
-			defence1 = info[i];
-			defence2 = info[i + 1];
+			int defence1, defence2;
+			defence1 = info[i] - 48;
+			defence2 = info[i + 1] - 48;
 			defence = (defence1 * 10) + defence2;
 			i++;
 			break;
 		case(7):	//hp
-			char hp1, hp2, hp3;
-			hp1 = info[i];
+			int hp1, hp2, hp3;
+			hp1 = info[i] - 48;
 			if (info[i + 1] != ']')
 			{
-				hp2 = info[i + 1];
+				hp2 = info[i + 1] - 48;
 				if (info[i + 2] != ']')
 				{
-					hp3 = info[i + 2];
+					hp3 = info[i + 2] - 48;
 					hp = (hp1 * 100) + (hp2 * 10) + hp3;
 					i = i + 2;
 					attribute++;
