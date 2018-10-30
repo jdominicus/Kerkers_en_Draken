@@ -387,9 +387,11 @@ void Application::handleOptions(int option)
 					if (player->getHealth() <= 0)
 						gameState = 0;
 					if (dungeon->getEndRoom() == player->getCurrentRoom() && player->getCurrentRoom()->getMonster())
+					{
 						std::cout << "You won the game!" << std::endl;
 						gameState = 8;
-						break;
+					}
+					break;
 				case 2: player->run(); 
 						gameState = 1; break;
 				case 3: player->useItem(); break;

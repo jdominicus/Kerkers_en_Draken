@@ -40,27 +40,27 @@ int Monster::getHealth() const
 	return this->hp;
 }
 
-int Monster::getAttack()
+int Monster::getAttack() const
 {
 	return this->attack;
 }
 
-int Monster::getNrOfAttacks()
+int Monster::getNrOfAttacks() const
 {
 	return this->nrOfAttacks;
 }
 
-int Monster::getStrenghtMin()
+int Monster::getStrenghtMin() const
 {
 	return this->strengthMin;
 }
 
-int Monster::getStrenghtMax()
+int Monster::getStrenghtMax() const
 {
 	return this->strengthMax;
 }
 
-int Monster::getDefence()
+int Monster::getDefence() const
 {
 	return this->defence;
 }
