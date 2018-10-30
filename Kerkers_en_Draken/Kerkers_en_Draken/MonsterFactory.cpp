@@ -196,15 +196,17 @@ Monster* MonsterFactory::getMonster(int layer) const
 	{
 		if (optionalMonsters[i]->getLevel() == layer)
 		{
-			if (startPos == 0)
+			if (startPos == 0 && layer > 1)
+			{
 				startPos = i;
+			}
 
 			nr++;
 		}
 	}
 
 	if (random->getBool(50 + layer * 5))
-		return new Monster(*(optionalMonsters[startPos + random->getNumber(0, nr - 1)]));
+		return new Monster(*(optionalMonsters[startPos + random->getNumber(0, (nr - 1))]));
 	else
 		return nullptr;
 }

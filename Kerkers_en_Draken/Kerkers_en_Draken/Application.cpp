@@ -93,43 +93,215 @@ void Application::createNewPlayer()
 
 void Application::loadPlayer()
 {
+	FileHandler* fH = new FileHandler();
+	fH->openHeroFile(0);
 
+	char name[15] = "++++++++++++++";
+	int level = 0;
+	int experience = 0;
+	int hitpoints = 0;
+	int maxHitpoints = 0;
+	int attack = 0;
+	int defence = 0;
+
+	int attribute = 0;
+
+	StringClass* hero = new StringClass(fH->readInfo());
+	const char* info = new char[hero->getLength() + 1];
+	info = hero->getCharArray();
+
+	for (int i = 0; i < hero->getLength(); i++)
+	{
+		if (info[i] == ';')
+		{
+			attribute++;
+			i++;
+		}
+
+		switch (attribute)
+		{
+		case(0):	//name
+			name[i] = info[i];
+			if (info[i + 1] == ';')
+			{
+				name[i + 1] = '\0';
+			}
+			break;
+		case(1):	//level
+			int level1, level2;
+			level1 = info[i] - 48;
+			if (info[i + 1] != ';')
+			{
+				level2 = info[i + 1] - 48;
+				level = (level1 * 10) + level2;
+				i++;
+			}
+			else
+			{
+				level = level1;
+			}
+			break;
+		case(2):	//experience
+			int xp1, xp2, xp3;
+			xp1 = info[i] - 48;
+			if (info[i + 1] != ';')
+			{
+				xp2 = info[i + 1] - 48;
+				if (info[i + 2] != ';')
+				{
+					xp3 = info[i + 2] - 48;
+					experience = (xp1 * 100) + (xp2 * 10) + xp3;
+					i = i + 2;
+				}
+				else
+				{
+					experience = (xp1 * 10) + xp2;
+					i++;
+				}
+			}
+			else
+			{
+				experience = xp1;
+			}
+			break;
+		case(3):	//hitpoints
+			int hp1, hp2, hp3;
+			hp1 = info[i] - 48;
+			if (info[i + 1] != ';')
+			{
+				hp2 = info[i + 1] - 48;
+				if (info[i + 2] != ';')
+				{
+					hp3 = info[i + 2] - 48;
+					hitpoints = (hp1 * 100) + (hp2 * 10) + hp3;
+					i = i + 2;
+				}
+				else
+				{
+					hitpoints = (hp1 * 10) + hp2;
+					i++;
+				}
+			}
+			else
+			{
+				hitpoints = hp1;
+			}
+			break;
+		case(4):	//maxHitpoints
+			int mhp1, mhp2, mhp3;
+			mhp1 = info[i] - 48;
+			if (info[i + 1] != ';')
+			{
+				mhp2 = info[i + 1] - 48;
+				if (info[i + 2] != ';')
+				{
+					mhp3 = info[i + 2] - 48;
+					maxHitpoints = (mhp1 * 100) + (mhp2 * 10) + mhp3;
+					i = i + 2;
+				}
+				else
+				{
+					maxHitpoints = (mhp1 * 10) + mhp2;
+					i++;
+				}
+			}
+			else
+			{
+				maxHitpoints = mhp1;
+			}
+			break;
+		case(5):	//attack
+			int attack1, attack2, attack3;
+			attack1 = info[i] - 48;
+			if (info[i + 1] != ';')
+			{
+				attack2 = info[i + 1] - 48;
+				if (info[i + 2] != ';')
+				{
+					attack3 = info[i + 2] - 48;
+					attack = (attack1 * 100) + (attack2 * 10) + attack3;
+					i = i + 2;
+				}
+				else
+				{
+					attack = (attack1 * 10) + attack2;
+					i++;
+				}
+			}
+			else
+			{
+				attack = attack1;
+			}
+			break;
+		case(6):	//defence
+			int defence1, defence2;
+			defence1 = info[i] - 48;
+			defence2 = info[i + 1] - 48;
+			defence = (defence1 * 10) + defence2;
+			i = i + 2;
+			attribute++;
+			break;
+		case(7):
+			break;
+		}
+	}
+	player = new Player(name, level, experience, hitpoints, maxHitpoints, attack, defence, *dungeon);
+
+	fH->closeFile();
+	//delete hero;
+	//delete info;
+	delete fH;
+	std::cout << "Hero -" << player->getName() << "- loaded.";
 }
 
 void Application::savePlayer()
 {
 	FileHandler* fH = new FileHandler();
 	fH->openHeroFile(1);
+	
+	fH->writeInfo("[");
 	fH->writeInfo(*player->getName());
-	for (int i = 0; i < 5; i++)
+	fH->writeInfo(";");
+	StringClass* str;
+	for (int i = 0; i < 6; i++)
 	{
-		//fH->writeInfo(*toArray(player->getAttributes(i)));
+		str = toArray(player->getAttributes(i));
+		fH->writeInfo(*str);
+		delete str;
+		fH->writeInfo(";");
 	}
+	fH->writeInfo("]");
 	std::cout << "The player has left the dungeon and lost his items in the process." << std::endl << std::endl;
 	fH->closeFile();
 	delete fH;
 }
 
-char** Application::toArray(int number)
+StringClass* Application::toArray(int number)
 {
-	char* numberArray[3];
-	if (number > 100)
-		*numberArray[0] = number / 100;
+	if (number == 0)
+		return new StringClass("0");
 
-	if(number > 10)
-		*numberArray[1] = number / 10;
+	int temp = number;
+	int totalCharacters = 0;
+	while (number != 0)
+	{
+		number /= 10;
+		totalCharacters++;
+	}
 
-	*numberArray[2] = number;
-	return numberArray;
+	char* array = new char[totalCharacters + 1];
+	array[totalCharacters] = '\0';
+
+	for (int i = totalCharacters - 1; i >= 0; i--)
+	{
+		array[i] = temp % 10 + 48;
+		temp /= 10;
+	}
+
+	StringClass* string = new StringClass(array);
+	delete[] array;
+	return string;
 }
-/*
-	attributes[0] = level;			//0-30
-	attributes[1] = hitpoints;		//0-maxhitpoints
-	attributes[2] = maxHitpoints;	//10 + level*10
-	attributes[3] = experience;		//0-100
-	attributes[4] = attack;			//10-100
-	attributes[5] = defence;		//10-100
-*/
 
 void Application::displayOptions() const
 {
