@@ -107,8 +107,7 @@ void Application::loadPlayer()
 	int attribute = 0;
 
 	StringClass* hero = new StringClass(fH->readInfo());
-	const char* info = new char[hero->getLength() + 1];
-	info = hero->getCharArray();
+	const char* info = hero->getCharArray();
 
 	for (int i = 0; i < hero->getLength(); i++)
 	{
@@ -248,10 +247,9 @@ void Application::loadPlayer()
 	player = new Player(name, level, experience, hitpoints, maxHitpoints, attack, defence, *dungeon);
 
 	fH->closeFile();
-	//delete hero;
-	//delete info;
+	delete hero;
 	delete fH;
-	std::cout << "Hero -" << player->getName() << "- loaded.";
+	std::cout << std::endl << "Hero -" << name << "- loaded!" << std::endl << std::endl;
 }
 
 void Application::savePlayer()
@@ -386,8 +384,11 @@ void Application::handleOptions(int option)
 			switch (option)
 			{
 				case 1: player->fight(); 
-					if (player->getHealth() == 0)
+					if (player->getHealth() <= 0)
 						gameState = 0;
+					if (dungeon->getEndRoom() == player->getCurrentRoom() && player->getCurrentRoom()->getMonster())
+						std::cout << "You won the game!" << std::endl;
+						gameState = 8;
 						break;
 				case 2: player->run(); 
 						gameState = 1; break;
