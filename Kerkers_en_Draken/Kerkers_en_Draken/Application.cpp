@@ -385,10 +385,17 @@ void Application::handleOptions(int option)
 			{
 				case 1: player->fight(); 
 					if (player->getHealth() <= 0)
+					{
+						std::cout << "You lost the game." << std::endl << std:endl;
 						gameState = 0;
-					if (dungeon->getEndRoom() == player->getCurrentRoom() && player->getCurrentRoom()->getMonster())
+					}
+					if (dungeon->getEndRoom() == player->getCurrentRoom() && player->getCurrentRoom()->getMonster() == nullptr)
+					{
 						std::cout << "You won the game!" << std::endl;
-						gameState = 8;
+						savePlayer();
+						std::cout << "Your hero walks out with glory." << std::endl << std::endl;
+						gameState = 0;
+					}
 						break;
 				case 2: player->run(); 
 						gameState = 1; break;
