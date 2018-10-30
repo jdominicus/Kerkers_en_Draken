@@ -24,4 +24,9 @@ class Monster
 		int getLevel() const;
 		void reduceHealth(int health);
 		int getHealth() const;
+		int getAttack();
+		int getNrOfAttacks();
+		int getStrenghtMin();
+		int getStrenghtMax();
+		int getDefence();
 };
