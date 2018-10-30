@@ -386,7 +386,7 @@ void Application::handleOptions(int option)
 				case 1: player->fight(); 
 					if (player->getHealth() <= 0)
 					{
-						std::cout << "You lost the game." << std::endl << std:endl;
+						std::cout << "You lost the game." << std::endl << std::endl;
 						gameState = 0;
 					}
 					if (dungeon->getEndRoom() == player->getCurrentRoom() && player->getCurrentRoom()->getMonster() == nullptr)
