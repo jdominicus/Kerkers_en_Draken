@@ -99,22 +99,37 @@ void Application::loadPlayer()
 void Application::savePlayer()
 {
 	FileHandler* fH = new FileHandler();
-	StringClass* temp = new StringClass("");
-	temp = player->getName();
+	fH->openHeroFile(1);
+	fH->writeInfo(*player->getName());
 	for (int i = 0; i < 5; i++)
 	{
-		fH->writeInfo(player->getAttributes(i) + 48);
+		//fH->writeInfo(*toArray(player->getAttributes(i)));
 	}
-	for (int i = 0; i < INV_SPACE; i++)
-	{
-		c = player->getInventory(i)->getId() + 48;
-		temp->append(c);
-		temp->append(player->getInventory(i)->getName());
-		fH->writeInfo();
-		delete temp;
-	}
+	std::cout << "The player has left the dungeon and lost his items in the process." << std::endl << std::endl;
+	fH->closeFile();
 	delete fH;
 }
+
+char** Application::toArray(int number)
+{
+	char* numberArray[3];
+	if (number > 100)
+		*numberArray[0] = number / 100;
+
+	if(number > 10)
+		*numberArray[1] = number / 10;
+
+	*numberArray[2] = number;
+	return numberArray;
+}
+/*
+	attributes[0] = level;			//0-30
+	attributes[1] = hitpoints;		//0-maxhitpoints
+	attributes[2] = maxHitpoints;	//10 + level*10
+	attributes[3] = experience;		//0-100
+	attributes[4] = attack;			//10-100
+	attributes[5] = defence;		//10-100
+*/
 
 void Application::displayOptions() const
 {

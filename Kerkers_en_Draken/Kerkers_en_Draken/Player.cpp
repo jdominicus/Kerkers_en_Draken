@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-Player::Player(const char* name, Dungeon& dungeon) : Player(name, 1, 0, 10, 10, 10, 10, dungeon)
+Player::Player(const char* name, Dungeon& dungeon) : Player(name, 0, 0, 10, 10, 70, 60, dungeon)
 {
 }
 
@@ -188,9 +188,13 @@ void Player::addExperience(int experience)
 
 	while (this->experience >= 100)
 	{
-		this->experience = this->experience - 100;
-		this->level++;
-		this->maxHitpoints += 10;
+		this->experience -= 100;
+		if (level < 30)
+		{
+			this->level++;
+			this->maxHitpoints += 10;
+		}
+		this->hitpoints = maxHitpoints;
 	}
 }
 
@@ -259,10 +263,10 @@ StringClass* Player::getName() const
 	return name;
 }
 
-Item* Player::getInventory(int index) const
-{
-	if (index >= 0 && index <= INV_SPACE)
-		return inventory[index];
-	else
-		return nullptr;
-}
+//Item* Player::getInventory(int index) const
+//{
+//	if (index >= 0 && index <= INV_SPACE)
+//		return inventory[index];
+//	else
+//		return nullptr;
+//}

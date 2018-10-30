@@ -21,22 +21,39 @@ void FileHandler::openMonsterFile()
 	}
 }
 
-void FileHandler::openHeroFile()
+void FileHandler::openHeroFile(int readWrite)
 {
-	file.exceptions(std::ifstream::badbit); // No need to check failbit
-	try 
+	if (readWrite == 0)
 	{
-		file.open("hero.txt");
+		file.exceptions(std::ifstream::badbit); // No need to check failbit
+		try
+		{
+			file.open("hero.txt");
+		}
+		catch (const std::ifstream::failure& e)
+		{
+			std::cout << "Exception opening/reading file";
+		}
 	}
-	catch (const std::ifstream::failure& e) 
+	else if (readWrite == 1)
 	{
-		std::cout << "Exception opening/reading file";
+
+		file.exceptions(std::ifstream::badbit); // No need to check failbit
+		try
+		{
+			write.open("hero.txt");
+		}
+		catch (const std::ifstream::failure& e)
+		{
+			std::cout << "Exception opening/reading file";
+		}
 	}
 }
 
 void FileHandler::closeFile()
 {
 	file.close();
+	write.close();
 }
 
 char* FileHandler::readInfo()
@@ -63,10 +80,10 @@ char* FileHandler::readInfo()
 	return info;
 }
 
-void FileHandler::writeInfo(char c)
+void FileHandler::writeInfo(StringClass str)
 {
-	if (file.is_open())
+	if (write.is_open())
 	{
-		file.put(c);
+		write.write(str.getCharArray(), str.getLength());
 	}
 }

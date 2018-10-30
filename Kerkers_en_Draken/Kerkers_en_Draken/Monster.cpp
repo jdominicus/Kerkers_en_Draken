@@ -2,8 +2,8 @@
 #include "StringClass.h"
 
 Monster::Monster(StringClass* name, int level, int attack, int nrOfAttacks, int strengthMin, int strengthMax, int defence, int hp)
-	: name{ name }, level{ level }, nrOfAttacks{ nrOfAttacks }, strengthMin{ strengthMin }, strengthMax{ strengthMax }, 
-	defence{ defence }, hp{ hp }
+	: name{ name }, level{ level }, attack{ attack },
+	nrOfAttacks{ nrOfAttacks }, strengthMin{ strengthMin }, strengthMax{ strengthMax }, defence{ defence }, hp{ hp }
 {
 }
 

@@ -26,6 +26,7 @@ class Application : public UserInterface
 		void createNewPlayer();
 		void loadPlayer();
 		void savePlayer();
+		char** toArray(int number);
 
 		void displayOptions() const;
 		int handleUserInput() const;

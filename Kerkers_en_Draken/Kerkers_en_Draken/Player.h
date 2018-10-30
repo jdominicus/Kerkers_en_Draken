@@ -51,6 +51,6 @@ class Player : public UserInterface
 
 		int getAttributes(int index) const;
 		StringClass* getName() const;
-		Item* getInventory(int index) const;
+		//Item* getInventory(int index) const;
 };
 

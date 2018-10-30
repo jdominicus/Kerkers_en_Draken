@@ -11,13 +11,14 @@ public:
 	FileHandler();
 	~FileHandler();
 	void openMonsterFile();
-	void openHeroFile();
+	void openHeroFile(int readWrite);
 	void closeFile();
 	char* readInfo();
-	void writeInfo(char c);
+	void writeInfo(StringClass str);
 
 private:
-	std::fstream file;
+	std::ifstream file;
+	std::ofstream write;
 	char info[lineLength];
 };
 
