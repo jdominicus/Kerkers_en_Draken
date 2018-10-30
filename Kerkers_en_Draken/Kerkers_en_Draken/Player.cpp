@@ -129,30 +129,42 @@ void Player::fight()
 	}
 
 	int damage = 0;
-	if (random->getBool(attack * 10))
-		damage = random->getNumber(0, attack);
+	if (random->getBool(50 + attack) && random->getBool(100 - monster->getDefence()))
+		damage = random->getNumber(1, 10 * level);
 	monster->reduceHealth(damage);
 	
-	std::cout << "You hit the " << monster->getName() << " for " << damage << " damage!" << std::endl;
+	if (damage != 0)
+		std::cout << "You hit the " << monster->getName() << " for " << damage << " damage!" << std::endl;
+	else
+		std::cout << "You miss the " << monster->getName() << "!" << std::endl;
+	
 	if (monster->getHealth() <= 0)
 	{
 		std::cout << "You killed the monster!" << std::endl << std::endl;
-		addExperience(50);
+		addExperience(monster->getLevel() * 10);
 		currentRoom->destroyMonster();
 		return;
 	}
 
-	if (random->getBool(attack * 50))
-		damage = random->getNumber(0, attack);
-	this->hitpoints = this->hitpoints - damage;
-
-	std::cout << "The " << monster->getName() << " hits you for " << damage << " damage!" << std::endl;
-	if (hitpoints <= 0)
+	for (int i = 0; i < monster->getNrOfAttacks(); i++)
 	{
-		std::cout << "You died!" << std::endl << std::endl;
-		return;
-	}
+		damage = 0;
+		if (random->getBool(monster->getAttack() - 0.1 * defence))
+			damage = random->getNumber(monster->getStrenghtMin(), monster->getStrenghtMax());
+		this->hitpoints = this->hitpoints - damage;
 
+		if (damage != 0)
+			std::cout << "The " << monster->getName() << " hits you for " << damage << " damage!" << std::endl;
+		else
+			std::cout << "You dodge the attack!" << std::endl;
+
+		if (hitpoints <= 0)
+		{
+			std::cout << "You died!" << std::endl << std::endl;
+			return;
+		}
+	}
+		
 	std::cout << "Player hitpoints: " << this->hitpoints << std::endl;
 	std::cout << monster->getName() << " hitpoints: " << monster->getHealth() << std::endl << std::endl;
 }
@@ -191,6 +203,9 @@ void Player::addExperience(int experience)
 		this->experience = this->experience - 100;
 		this->level++;
 		this->maxHitpoints += 10;
+		this->attack += 10;
+		this->defence += 10;
+		this->hitpoints = this->maxHitpoints;
 	}
 }
 

@@ -98,22 +98,22 @@ void Application::loadPlayer()
 
 void Application::savePlayer()
 {
-	FileHandler* fH = new FileHandler();
-	StringClass* temp = new StringClass("");
-	temp = player->getName();
+	//FileHandler* fH = new FileHandler();
+	//StringClass* temp = new StringClass("");
+	//temp = player->getName();
 	for (int i = 0; i < 5; i++)
 	{
-		fH->writeInfo(player->getAttributes(i) + 48);
+		//fH->writeInfo(player->getAttributes(i) + 48);
 	}
 	for (int i = 0; i < INV_SPACE; i++)
 	{
-		c = player->getInventory(i)->getId() + 48;
-		temp->append(c);
-		temp->append(player->getInventory(i)->getName());
-		fH->writeInfo();
-		delete temp;
+		//c = player->getInventory(i)->getId() + 48;
+		//temp->append(c);
+		//temp->append(player->getInventory(i)->getName());
+		//fH->writeInfo();
+		//delete temp;
 	}
-	delete fH;
+	//delete fH;
 }
 
 void Application::displayOptions() const
@@ -199,7 +199,7 @@ void Application::handleOptions(int option)
 			switch (option)
 			{
 				case 1: player->fight(); 
-					if (player->getHealth() == 0)
+					if (player->getHealth() < 0)
 						gameState = 0;
 						break;
 				case 2: player->run(); 
