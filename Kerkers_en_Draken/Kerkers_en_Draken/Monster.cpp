@@ -12,7 +12,7 @@ Monster::~Monster()
 	delete name;
 }
 
-Monster::Monster(const Monster& other) : level{ other.level }, nrOfAttacks{ other.nrOfAttacks }, strengthMin{ other.strengthMin }, 
+Monster::Monster(const Monster& other) : level{ other.level }, attack{ attack }, nrOfAttacks{ other.nrOfAttacks }, strengthMin{ other.strengthMin },
 strengthMax{ other.strengthMax }, defence{ other.defence }, hp{ other.hp }
 {
 	this->name = new StringClass(*(other.name));
