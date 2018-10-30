@@ -93,6 +93,9 @@ void Application::createNewPlayer()
 
 void Application::loadPlayer()
 {
+	if (player != nullptr)
+		delete player;
+
 	FileHandler* fH = new FileHandler();
 	fH->openHeroFile(0);
 
